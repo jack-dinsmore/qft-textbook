@@ -1,0 +1,168 @@
+\documentclass[11pt]{book}
+
+% I think I need to go back through and better clarify what the difference is between operators in the npcfs and numbers in the path integral. How do anti particles and incoming vs outgoing particles manifest themselves in both?
+
+\usepackage[paperwidth=6in, paperheight=9in, top=0.8in, bottom=0.8in, left=0.6in, right=0.6in]{geometry}
+\usepackage[compat=1.1.0]{tikz-feynman}
+\usepackage{imakeidx} % Index
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{environ}
+\usepackage{bm}
+\usepackage{braket}
+\usepackage{setspace}
+\usepackage{makecell}
+\usepackage{dsfont}
+\usepackage{fancyhdr}
+\newcounter{mycounter}
+\usepackage{etoolbox}
+\usepackage{ifthen}
+\usepackage{siunitx}
+\usepackage[explicit,compact]{titlesec} % For changing the chapter layout
+\usepackage[T1]{fontenc}
+\usepackage{crimson}
+\usepackage[hidelinks]{hyperref}
+
+\NewEnviron{e}[1][]{\begin{equation}\BODY\end{equation}}
+\NewEnviron{es}[1][]{\begin{equation}\begin{split}\BODY\end{split}\end{equation}}
+\NewEnviron{ec}[1][]{\begin{equation}\begin{gathered}\BODY\end{gathered}\end{equation}} % Centered
+\NewEnviron{problem}[1][]{
+  \small
+  \ifthenelse{\equal{\value{questioncounter}}{\string 1}}{\section*{Problems}}{}
+  \noindent\textbf{\thechapter.\thequestioncounter{}\indent #1}. \BODY
+  \stepcounter{questioncounter}
+  \vspace{1em}  
+}
+
+\newcommand{\Schrodinger}[0]{{Schr{\"o}dinger} }
+\newcommand{\jtd}[1]{\textbf{\color{teal}JTD: #1} }
+\newcommand{\del}{\partial }
+\newcommand{\parens}[1]{\left(#1\right) }
+\newcommand{\brackets}[1]{\left[#1\right] }
+\newcommand{\braces}[1]{\left\{#1\right\} }
+\newcommand{\expp}[1]{\exp \left[ #1 \right] }
+\newcommand{\eval}[1]{\left. #1 \right| }
+\newcommand{\abs}[1]{\left| #1 \right| }
+\newcommand{\ftve}[2]{\frac{d^{#1} #2}{(2\pi)^{#1}}}
+% \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\emphi}[1]{\emph{#1}\index{#1}}
+
+\makeatletter
+\let\LaTeXStandardPart\part
+\newcommand{\unstarredpart@@noopt}[1]{
+  \unstarredpart@@opt[#1]{#1}
+}
+
+\newcommand{\unstarredpart@@opt}[2][]{
+  \cleardoublepage% (For clearing content before!!!)
+  \begingroup
+  \let\newpage\relax
+  \LaTeXStandardPart[#1]{#2}
+  \endgroup
+}
+\newcommand{\starredpart}[1]{\LaTeXStandardPart*{#1}}
+\newcommand{\unstarredpart}{\@ifnextchar[{\unstarredpart@@opt}{\unstarredpart@@noopt}}
+\renewcommand{\part}{\@ifstar{\starredpart}{\unstarredpart}}
+\def\Chaptername{}
+\def\Sectionname{}
+\newcounter{questioncounter}
+\setcounter{tocdepth}{1}
+
+
+\let\Chaptermark\chaptermark
+\def\chaptermark#1{\def\Chaptername{#1}\Chaptermark{#1}}
+\let\Sectionmark\sectionmark
+\def\sectionmark#1{\def\Sectionname{#1}\Sectionmark{#1}}
+
+\titleformat{\chapter}[block]
+  {\bfseries \centering}{\Large Chapter \thechapter \\\vspace{1cm}}{1em}{\Large #1 \setcounter{questioncounter}{1}}
+\titleformat{\section}[block]
+  {\bfseries \centering \Large}{\thesection }{1em}{#1}
+\titleformat{\subsection}[block]
+  {\vspace{1em}\bfseries \centering \large}{}{1em}{#1}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{} % clear all footer fields
+\fancyhead[LE]{\textit{Chapter \thechapter \hspace{2em}\Chaptername}}
+\fancyhead[RO]{\textit{\thesection \hspace{2em} \Sectionname}}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[CE,CO]{\thepage}
+\setlength{\headheight}{13.6pt}
+
+\tikzfeynmanset{
+  momentum/arrow style=lightgray,
+  with arrow/.style = {
+  decoration={
+    markings,
+    mark=at position 0.5
+         with {\arrow[xshift=2mm]{Stealth[width=2mm,length=2.5mm]}}
+    },
+  postaction=decorate}
+}
+\tikzset{snake it/.style={decorate, decoration=snake}}
+\makeindex
+
+\title{Perturbative Quantum Field Theory}
+
+\author{Jack Dinsmore}
+
+\begin{document}
+\setcounter{questioncounter}{1}
+
+\maketitle
+\tableofcontents
+\setstretch{1.12}
+
+\frontmatter
+\input{front/prelude.tex}
+\input{front/notation.tex}
+
+\mainmatter
+
+\input{content/why-qft.tex}
+\part{Non-Perturbative Techniques}
+\input{content/scattering.tex}
+\input{content/spectrum.tex}
+\input{content/lattice.tex}
+
+\part{Quantum Electrodynamics \& Abelian Gauge Theories}
+\input{content/abelian-intro.tex}
+\input{content/spin-0.tex}
+\input{content/spin-0.5.tex}
+\input{content/spin-1.tex}
+\input{content/ir-divergences.tex}
+\input{content/uv-divergences.tex}
+\input{content/qed-effects.tex}
+
+\part{Non-Abelian Theories}
+\input{content/yang-mills.tex}
+\input{content/electroweak.tex}
+\input{content/standard-model.tex}
+
+\part{Review}
+\input{content/sr.tex}
+\input{content/em.tex}
+\input{content/qm.tex}
+\input{content/complex-analysis.tex}
+\input{content/lie-groups.tex}
+
+% \part{Excluded stuff}
+
+% \input{content/phi-4.tex}
+% \input{content/sombrero.tex}
+% \input{content/lagrangian.tex}
+% Stern Gerlach experiment in rel qft?
+
+
+\appendix
+
+\input{content/appendices}
+
+\printindex
+
+\end{document}

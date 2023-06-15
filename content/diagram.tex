@@ -1,0 +1,28 @@
+\chapter{Feynman Diagrams}
+
+\section{What is a Feynman Diagram}
+
+\begin{figure}[t]
+  \centering
+  \feynmandiagram [horizontal=a to b] { 
+    i1 [particle=$e^-$] -- [fermion] a -- [fermion] i2 [particle=$e^+$],
+    a -- [photon] b,
+    f1 [particle=$\mu^+$] -- [fermion] b -- [fermion] f2 [particle=$\mu^-$],
+  };
+
+  \feynmandiagram [horizontal=a to b] { 
+    i1 [particle=$e^-$] -- [fermion, edge label'=$p$] a -- [fermion] i2 [particle=$e^+$],
+    a -- [photon, momentum'=$k$, edge label=$\gamma$] b,
+    f1 [particle=$\mu^+$] -- [fermion] b -- [fermion] f2 [particle=$\mu^-$],
+  };
+  
+  \feynmandiagram[horizontal=a to f] {
+    i1 [particle=$e^-$] -- [fermion] x -- [fermion] a [blob] -- [fermion] y [crossed dot] -- [fermion] i2 [particle=$e^+$],
+    a -- [charged boson] f [particle=$\gamma$],
+    x -- [photon] y,
+  };
+  \caption{A Feynman Diagram}
+\end{figure}
+
+
+\section{Wick's theorem}

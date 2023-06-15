@@ -1,0 +1,94 @@
+\chapter{Scattering}
+\label{chap:scattering}
+
+This part is devoted to understanding $n$-point correlation functions, which are the output of QFT predictions. These functions have two major uses: one is to compute scattering cross-sections and decay probabilities (this chapter) while another is to compute the spectrum of a quantum particle (chapter \ref{chap:spectrum}). In these two chapters we will introduce important tools, but save actual predictions for later parts, where we introduce new Lagrangians and use them to compute the $n$-point correlation functions.
+
+\section{\texorpdfstring{$S$}{S} Matrix and Scattering Amplitudes}
+
+A scattering experiment consists of shining a beam of particles with fixed four-momentum $p_1$ on one or more other beams with their own four-momenta $p_2$, $p_3$, $\dots, p_n$. We call this initial state $\ket{\bm p}$. The momenta of outgoing particles $q_1$, $q_2$, $\dots, q_m$ are measured as the final state $\ket{\bm q}$. We label these states only with three-vectors $\bm p$ rather than four-vectors $p$ because of the constraint $p^2 = m^2$, which makes the fourth component redundant. These states will be defined precisely in terms of correlation functions later, but for now we assert that they are Lorentz invariant. Then the probability of scattering from $\ket{\bm p}$ to $\ket{\bm q}$ is $|\braket{\bm q|\bm p}|^2$ and is also Lorentz invariant. We therefore define 
+\begin{e}
+  iS_{q \rightarrow o} = \braket{\bm q|\bm p}
+\end{e}
+and $|S|^2$ is the observable probability of the scattering. This quantity is called the $S$-matrix. The coefficient $i$ is included due to tradition.
+
+If no interactions occur, we expect $n=m$ and $p_j = q_j$ for all $j$. Then $iS \propto \prod_i \delta(p_j - q_j).$ Even when interactions are possible, many particles will still not interact and will pass through the beam unchanged. We therefore define a new quantity $M$ such that
+\begin{e}
+  iS_{p \rightarrow q} = \prod_i \delta(p_j - q_j) + iT_{p\rightarrow q}
+\end{e}
+where $T$ is called the $T$-matrix, which quantifies the interactions that occur during scattering.
+
+Due to conservation of momentum, $\sum_i p_i = \sum_j q_j$ even when interactions are present. To extract this fact we make one more definition:
+\begin{e}
+  iT_{p \rightarrow q} = (2\pi)^4 \delta\parens{\sum_i p_i - \sum_j q_j}iM_{p\rightarrow q}
+\end{e}
+where $M$ is called the \emphi{scattering amplitude} and is Lorentz invariant. Unlike $S$ and $T$ it has finite matrix elements. Whenever we compute a prediction for a scattering experiment in this book, calculating $M$ will be our goal.
+
+\section{Initial and Final Scattering States}
+
+Until now, we have made no reference to QFT. The $M$ amplitude can be defined in a non-relativistic theory or even classical mechanics. Rather, QFT comes in when we define the Lorentz-invariant $\ket{\bm p}$ and $\ket{\bm q}$ states in terms of the $\hat \psi(x)$ operator introduced in chapter \ref{chap:intro}.
+
+The definition of $\hat \psi(x)$ was that it creates a particle at position $x$ when acting on the vacuum $\ket 0$. We need to now define a $\hat \psi(p)$ which creates a particle with momentum $p$ but undefined position. Inspired by non-relativistic quantum mechanics, we'll define $\hat \psi(p)$ via the Fourier transform.
+\begin{e}
+  \hat \psi(p) = \int d^4 x\, e^{-ik \cdot x}\hat \psi(x).
+  \label{eqn:momentum-operator}
+\end{e}
+The dot product in the exponent is the dot product of four-vectors: $k_\mu x^\mu = E t - \bm k \cdot \bm x$ where $E=k^0$ is the particle kinetic energy and $t$ is the time. Thus, (\ref{eqn:momentum-operator}) states that $\hat \psi(p)$ is just a plane wave of $\hat \psi(x)$ operators. This is consistent with our intuitive understanding of momentum.
+
+The physics of $n$ particles with momentum $p_1,\dots p_n$ scattering to $m$ particles with momentum $q_1,\dots q_n$ is contained in the correlation function
+$$\braket{\hat\psi(x_1)\dots\hat\psi(x_n)\hat\psi^\dagger(y_1)\dots\hat\psi^\dagger(y_m)}.$$
+Writing the correlation function in terms of momenta using (\ref{eqn:momentum-operator}),
+\begin{ec}
+  \braket{\bm p | \bm q} =
+  \braket{\hat\psi(p_1)\dots\hat\psi(p_n)\hat\psi^\dagger(q_1)\dots\hat\psi^\dagger(q_m)} =\\
+  \prod_i^n \int d^4 x_i\, e^{ip_i \cdot x_i}\prod_j^m \int d^4 y_j\, e^{-iq_j \cdot y_j}\braket{\hat\psi(x_1)\dots \hat\psi(x_n)\hat\psi^\dagger(y_1)\dots\hat\psi^\dagger(y_n)}.
+  \label{eqn:momentum-corr-func}
+\end{ec}
+
+A strange aspect of the above equation is that it does not enforce the so-called \emphi{on-shell} constraint, that a particle with mass $m$ and momentum $p$ satisfies $p^2 = m^2$ always. The name on-shell stems from the fact that $p^2 = m^2$ is the equation of the ``shell'' of a hyperbola in $\mathds{R}^4$. In fact, the on-shell constraint is effectively enforced because the spacetime integral in the second line constructively interferes over different values of $x_i$ and $y_j$ as long as all the momenta are on shell. This causes (\ref{eqn:momentum-corr-func}) to rise to infinity for physical momenta. Otherwise, destructive interference will occur and (\ref{eqn:momentum-corr-func}) remains finite. If this assertion seems doubtful, the reader can check that (\ref{eqn:momentum-corr-func}) is infinite when we compute scattering amplitudes in later chapters.
+
+This concludes our discussion of the connection between correlation functions and scattering amplitudes, because (\ref{eqn:corr-func-to-amp}) is valid now even when interactions are present. The reasoning is simple: the observer should not be able to tell based on the final state $\ket{q}$ whether it resulted from a sufficiently ancient scattering event or whether the state was always $\ket{q}$. Therefore, if (\ref{eqn:corr-func-to-amp}) was valid for no scattering, it's also valid for a scattering in the past. The ``sufficiently ancient'' caveat will never matter for an experiment, since it is not possible to measure a particle as it is undergoing a scattering event. This is for the same reason it is not possible to observe a particle in the act of tunneling, or to observe \Schrodinger's cat die; part of the nature of quantum mechanics is that events such as scattering or tunneling can occur, even if they are never observed directly.
+
+In some cases, a particle contains more information that just its momentum. From non-relativistic quantum mechanics, we know that fermions also each have spin, and from Maxwell's equations we know light has polarization. In these cases, $\ket{\bm p}$ will contain all the initial state's properties --- momentum, spin, polarization, etc --- and ditto for $\ket{\bm q}$. We will address this in greater detail when we apply (\ref{eqn:corr-func-to-amp}) to the case of fermions.
+
+
+
+\section{Decay Widths and Cross Sections}
+
+It's worth making the connection between scattering amplitudes and experiment more explicit. The connection is quite simple except for the fact that scattering amplitudes are Lorentz invariant and experiments, which are done at fixed velocities and orientations, are not. Scattering amplitudes and the outcome of scattering experiments can therefore differ by a energy-dependent coefficient, which we will work out by computing the normalization of the wavefunction $\psi(\bm x)$
+
+Let's consider a single particle of mass $m$ scattering into $n$ final particles, with momentum $q_j$. A single-particle scattering event is also known as particle decay, and the interesting quantity is the decay width $\Gamma$, which is the probability of scattering per unit time in the rest frame of the particle. The lifetime $\tau$ of the particle is related to $\Gamma$ by $\tau = 1/\Gamma$.
+
+Assume we know $\ket{\bm p}$ in terms of correlation functions $\braket{\psi(p)\dots}$ as outlined in the previous section. We'll convert these fixed-momentum fields back to position fields via the inverse Fourier transform:
+\begin{e}
+  \psi(x) = \int \frac{d^4 k}{(2\pi)^4}\, e^{-ik \cdot x}\delta(k^2 - m^2) \psi(k).
+\end{e}
+The delta function can be inserted with no penalty because of the on-shell constraint. 
+
+Since experiments measure the spatial part of momentum, we explicitly compute the $k_0$ integral. Using the fact that
+\begin{e}
+  \int dx\, \delta(f(x)-f(z)) = \frac{2\pi}{|f'(z)|}\delta(x-z),
+\end{e}
+we have
+\begin{e}
+  \psi(x) = \int \frac{d^3 k}{(2\pi)^3}\, e^{-ik \cdot x} \frac{1}{\sqrt{2E_{\bm k}}}\psi(k)
+\end{e}
+where $E_{\bm k} = k_0 = \sqrt{m^2 - \bm{k}^2}$ is the energy of the particle at momentum $\bm k$. Integrating over all space to find the normalization gives
+\begin{e}
+  1 = \int d^3x\, |\psi(x)|^2 = \int \frac{d^3 k}{(2\pi)^3}\, \frac{1}{2E_{\bm k}}|\psi(\bm k)|^2
+\end{e}
+The lesson to take from this is that the Lorentz-invariant Fourier transform $|\psi(\bm k)|^2$, differs from the physical observable by a factor of $1/2E_{\bm k}$. In (\ref{eqn:corr-func-to-amp}), we wrote scattering amplitudes in terms of Fourier transformed wavefunctions, so we should maintain this factor of $1/2E_{\bm k}$. Thus, the probability to decay into the final state $\ket {\bm q}$ is
+\begin{es}
+  d\Gamma = &\parens{\frac{1}{2 E_p}}\parens{\prod_j\frac{d^3 q_j}{(2\pi)^3}\frac{1}{2 E_{q_j}}} \int \frac{d^3 p'}{(2\pi)^3} \braket{\bm q|\bm p}\braket{\bm p'|\bm q}\\
+  = &\parens{\frac{1}{2 E_p}}\parens{\prod_j\frac{d^3 q_j}{(2\pi)^3}\frac{1}{2 E_{q_j}}} |M_{p\rightarrow q}|^2(2\pi)^4 \delta\parens{p - \sum_j q_j}.
+\end{es}
+We integrated over $\bm p'$ in the first line because we don't know the initial momentum of an arbitrary particle drawn from the particle beam; we only now the final states as detected.
+
+Similar techniques can be used to find the probability of interaction for multiple to multiple particle scattering; in this case, the probability is called a cross section $\sigma$. The differential cross section $d\sigma$ is very similar to the equation for $d\Gamma$, except that there may be additional coefficients due to the fact that multiple momenta $\bm p_i$ are now unknown. For example, for two incoming particles with velocity $v_1$ and $v_2$, the differential cross section is
+\begin{es}
+  d\sigma = &\frac{1}{|\bm v_1 - \bm v_2|}\parens{\prod_i\frac{d^3 p_i}{(2\pi)^3}\frac{1}{2 E_{\bm p_i}}}\parens{\prod_j\frac{d^3 q_j}{(2\pi)^3}\frac{1}{2 E_{q_j}}}\\
+  &\times|M_{p\rightarrow q}|^2(2\pi)^4 \delta\parens{\sum_u p_i - \sum_j q_j}.
+\end{es}
+
+These cases of 1 and 2 particles cover most scattering events. To evaluate the total probability of scattering, $d\Gamma$ or $d\sigma$ may be integrated over all momenta. If identical particles $A$ and $B$ are present in the initial and final states, the states where $A$ and $B$ are switched should count only once. Thus, for $k$ types of $m_j$ identical particles, we should divide the cross section by $\prod_{j=1}^k m_j!$.
+
+\jtd{Need to fix this up, including defining $\sigma$, doing more math, and making it less hand-wavy}

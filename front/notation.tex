@@ -1,0 +1,48 @@
+\chapter{Notation}
+
+\subsubsection*{Units}
+In quantum mechanics, observable quantities have units of mass, length, time, and charge. This book collapses these four units down to one by defining Planck's reduced constant, the speed of light, and permittivity of free space to be $\hbar=c=\epsilon_0=1$. It's customary to keep mass as the remaining unit and define the other fundamental units in terms of mass:
+\begin{e}
+  \relax
+  [\mathrm{length}] = [\mathrm{mass}]^{-1}, \qquad [\mathrm{time}] = [\mathrm{mass}]^{-1}, \qquad [\mathrm{charge}] = [\mathrm{mass}]^{0}.
+  \label{eqn:natural-units}
+\end{e}
+in four spacetime dimensions. Such a unit system is called \emphi{natural units}\index{natural units}. It's also common just to quote the exponent of $[\mathrm{mass}]$, saying for example that length has dimension $-1$.
+
+To convert a number from natural units back to a more standard unit system, one need only multiply by the correct combination of $\hbar$, $c$, and $\epsilon_0$. As an example, the fine-structure constant $\alpha = e^2 / (4\pi)$ is $\alpha = e^2 / (4\pi \epsilon_0 \hbar c)$. Other important dimensions are 
+\begin{ec}
+  \relax
+  [\mathrm{Action}]=0,\qquad [\mathrm{Lagrangian}]=d,\qquad [\partial_\mu]=1,\\
+  [G_\mathrm{Newton}] = -2, \qquad [G_\mathrm{Fermi}] = -2
+\end{ec}
+where $d$ is the dimension of spacetime.\index{Fermi constant}
+
+\subsubsection*{Special Relativity}
+We will use the mostly-minus form of the metric tensor for special relativity:
+
+\begin{e}
+  ds^2 = dt^2 - dx^2 - dy^2 - dz^2\qquad \mathrm{or} \qquad \eta_{\mu\nu} = \left(\begin{matrix}1&&&\\&-1&&\\&&-1&\\&&&-1\end{matrix}\right)
+\end{e}
+which is equivalent to $\eta_{\mu\nu} = \mathrm{diag}(1,-1,-1,-1)$. A result of this choice is that a timelike vector has positive norm:
+\begin{e}
+  \eta_{\mu\nu}p^\mu p^\nu = p\cdot p = p^\mu p_\mu = p^2 > 0.
+\end{e}
+If this momentum represents a particle, then the mass of the particle is defined by $p^2 = m^2$. This is known as the on-shell\index{on-shell} condition. When we refer to the spacial part of a four vector, we use boldface:
+\begin{e}
+  \bm p = (p_1, p_2, p_3)
+\end{e}
+so that we can also write a particle mass as
+\begin{e}
+  m^2 = p_0^2 - \bm p^2.
+\end{e}
+The energy-mass relation of special relativity, $E^2 = m^2 + p^2$, indicates that $|p_0|$ is the energy of the particle. We therefore often refer to $p_0$ as $E_p$ and require that $p_0 = E_p>0$.
+
+\subsubsection*{Fourier Transforms}
+Our normalization for the Fourier transform and its inverse is as follows:
+\begin{e}
+  f(k) = \int d^d x\, e^{-ik\cdot x} f(x) \qquad f(x) = \int \frac{d^d k}{(2\pi)^d}\, e^{ik\cdot x} f(k)
+\end{e}
+where $d$ is the number of space(time) dimensions used. To prove that the Fourier transform and inverse Fourier transform are indeed inverses, the following formula is useful:
+\begin{e}
+  (2\pi)^d \delta(k) = \int d^d x e^{ik \cdot x}.
+\end{e}

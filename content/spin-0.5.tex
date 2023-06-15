@@ -1,0 +1,267 @@
+\chapter{Spin One Half}
+\label{chap:spin-one-half}
+
+\noindent This chapter deals with extending QFT to cover particles with spin, also known as \emphi{fermions}. Spin is covered in non-relativistic quantum mechanics, though its properties seem sometimes mysterious and arbitrary. In particular, the fact that fermions obey the Pauli exclusion principle and bosons do not cannot be explained in non-relativistic quantum mechanics. This explanation is provided by relativity in QFT in the form of the spin-statistics theorem, which we explain in this chapter. Before arriving at this key result, however, we discuss spin in a generalized sense (section \ref{sec:non-rel-spin}) and show that when relativity is taken into account, spin implies the existence of antiparticles (section \ref{sec:clifford}).
+
+Let's start with a simple definition: spin is the intrinsic angular momentum of a particle. In order to store a particle's spin state in QFT we'll need to graduate our scalar field particle operator $\hat \phi$ to a vector of operators $\hat \psi = (\hat \psi_0, \hat \psi_1,\dots)^T$. This vector is called a \emphi{spinor}.
+
+The next section uses the definition of spin as intrinsic angular momentum to dictate how many entries the spinor must have and what operators can act on it. Our discussion will start with the non-relativistic case, where we do not consider boosts, and then we will add boosts to see how they change the discussion. Following this, we'll describe how to similarly graduate the $\psi$ in the path integral of the QFT principle of least action to a spinor. With this complete, we will repeat the analysis of the previous chapter and derive Feynman rules for fermions. Finally, we will use these new fermions to understand electrons, the Coulomb potential, and atomic nuclei.
+
+\section{Spinors and Spin Operators}
+\label{sec:non-rel-spin}
+
+Spin is a quantum state, and in any quantum theory, a quantum state is acted on by operators. It will require the description of new mathematical tools which come from the field of group theory, but by the end we will have a complete description of any particle with spin.
+
+To measure the spin of a spinor $\psi$, we act on $\psi$ with a vector of operators $\bm S$. In order to be interpreted as an angular momentum vector, $\bm S$ must satisfy the defining feature of angular momentum: 
+
+\begin{center}
+  \textit{Angular momentum generates rotations.}
+\end{center}
+
+The notion of a \emphi{generator} is our first group theoretic term and we will define it in the following paragraph. But first, this definition of angular momentum is different from the classical definition of $\bm L = \bm r \times \bm p$. It is nevertheless a correct definition due to Noether's theorem, which states that an operator's generator is conserved if that operator is a symmetry of the Hamiltonian (appendix \ref{app:noether}). Rotations are a symmetry of spacetime, meaning that if angular momentum generates rotations then angular momentum is conserved. The cross product definition of the angular momentum will return later in this section.
+
+\subsection{Generators}
+
+Now to define what a generator is. Consider a rotation operation $R$ which acts on a three-component vector. We know that $R$ can be written as products of the three-dimensional rotation matrices:
+\begin{ec}
+  R_x(\theta) = \parens{\begin{matrix}1 & 0 & 0 \\ 0 & \cos\theta & -\sin\theta \\ 0 & \sin\theta & \cos \theta\end{matrix}}\qquad 
+  R_y(\theta) = \parens{\begin{matrix}\cos\theta&0&\sin\theta \\ 0&1&0 \\ -\sin\theta & 0 & \cos \theta\end{matrix}}\\
+  R_z(\theta) = \parens{\begin{matrix}\cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos \theta & 0 \\ 0&0&1\end{matrix}}.
+  \label{eqn:rotation-matrices}
+\end{ec}
+This fact shows that there are many possible rotation matrices, but that they can each be traced down to the three matrices above. In fact, the above rotation matrices can be simplified even more by writing $R_j(\theta) = e^{i\theta S_j}$, where 
+\begin{ec}
+  S_x = \frac{i}{2}\parens{\begin{matrix}0 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0\end{matrix}}\qquad 
+  S_y = \frac{i}{2}\parens{\begin{matrix}0&0&1 \\ 0&0&0 \\ -1 & 0 & 0\end{matrix}}\\
+  S_z = \frac{i}{2}\parens{\begin{matrix}0 & -1 & 0 \\ 1 & 0 & 0 \\ 0&0&0\end{matrix}}.
+  \label{eqn:rotation-generators}
+\end{ec}
+You can check for yourself that exponentiating these matrices gives back the rotation matrices. An arbitrary rotation can therefore be written as 
+\begin{e}
+  R = e^{i\bm \theta \cdot \bm S}
+  \label{eqn:rotation-generation}
+\end{e}
+where we have arranged $S_x$, $S_y$, and $S_z$ into a vector called $\bm S$. The three components of the vector $\bm \theta$ are called Euler angles and they parameterize the rotation matrix $R$.
+
+In mathematical language, we say that $\bm S$ \emph{generates} the rotations because all rotations can be achieved by plugging different values of $\bm \theta$ into (\ref{eqn:rotation-generation}). The fact that angular momentum is generated by rotation could mean that we should just take $\bm S$ as the spin operator $\bm S$, and write the spinor as a three dimensional vector which $\bm S$ acts on.
+
+\subsection{Angular Momentum Algebra}
+
+This procedure does not work in practice because there are other ways to generate rotations. One can rotate a complex vector for instance, in which case we need a new set of $\bm S$ matrices which are themselves complex. There is an even finer point which must be made: it is necessary that $\bm S$ generate a three-dimensional rotation since spacetime is invariant under three-dimensional rotations. However, the matrix $R$ need not act on a three-dimensional vector. $R$ could act on a five-dimensional vector, for example, and rotate only in a three-dimensional subspace. In this case $\bm S$ would still contain three generators, but each generator would be a $5\times 5$ matrix rather than $3\times 3$.
+
+We therefore need to write a more general definition of rotations than just the rotation matrices (\ref{eqn:rotation-matrices}). One property rotations must have is that they must preserve the length of vectors. That is, $R$ must be unitary. Problem \jtd{cite} asks the reader to show that for $\bm e^{iM}$ to be unitary, $M$ must be hermitian and determinant 1. Thus, the entries of $\bm S$ are hermitian.
+
+The other required property of rotations comes from the way in which they anticommute. Consider rotating a vector aligned with the $z$-axis. If we rotate in the $x$ direction by a small angle $\delta$ first and then $y$ by the same $delta$, we get a different vector than rotating in the $y$ direction first then $y$. This is because the rotation matrices anticommute. Using (\ref{eqn:rotation-matrices}) or drawing pictures that the two rotations differ by a rotation about the $z$ axis by angle $\delta^2$. We can turn this fact into a constraint on $\bm S$ by using (\ref{eqn:rotation-generation}) to define the $x$, $y$, and $z$ rotations. They show that $S_xS_y - S_yS_x = i S_z$.
+
+In principle, we could have aligned our initial vector along any axis $z$, so that the more general version of this constraint is
+\begin{e}
+  \brackets{S_i, S_j} = i\epsilon_{ijk}S_k
+  \label{eqn:angular-momentum-algebra}
+\end{e}
+where $\epsilon_{ijk}$ is the Levi-Civita symbol. Any set of hermitian, determinant one matrices $\bm S = (S_x, S_y, S_z)$ which satisfies this equation is a valid angular momentum operator. We usually refer to (\ref{eqn:angular-momentum-algebra}) as an \emphi{angular momentum algebra}, and matrices that satisfy it are \emphi{representations} of the angular momentum algebra
+
+\subsection{Using Lie groups to find representations of the angular momentum algebras}
+The task of finding matrices $\bm S$ which satisfy (\ref{eqn:angular-momentum-algebra}) (or in mathematical language, finding representations of the angular momentum algebra) has fortunately been solved using group theory. A Lie group is a closed, continuous set of operators, where closed signifies that two operators in the group $U$ and $V$ multiply to produce another operator $W$ which is also in the group. We have unknowingly been working with the group of rotations in three dimensions, which is called the ``special orthogonal group of order three,'' or SO(3). ``Special'' means that the group operators do not change the length of vectors, ``orthogonal'' means that the group operators are real and unitary, and the three indicates that the rotation occurs in three dimensions.
+
+A Lie group satisfies the general result that any group element $G$ can be written as 
+\begin{e}
+  G = e^{i\bm \theta \cdot \bm S}
+  \label{eqn:lie-algebra-generator}
+\end{e}
+where $\bm S$ are a special set of matrices known as the generators of the Lie group. We used this property in (\ref{eqn:rotation-generation}), but we did not know that it was valid for any Lie groups. The matrices $\bm S$ must satisfy special relations to each other which are dependent on the Lie group the generate; these relations are called a Lie algebra. An example is the angular momentum algebra we discussed above, which we now know as the Lie algebra of SO(3). Mathematicians sometimes label this algebra as $\mathfrak{so}(3)$ but physicists usually use SO(3) to refer to the algebra in addition to the group. We will therefore use the $\mathfrak{so}(3)$ notation in this section only.
+
+Once we specify the dimensions of the spinor which the group elements act on --- say the spinor has dimension $n$, then we can write group elements as $n\times n$ matrices. This is called a representation. Our three-dimensional rotation matrices (\ref{eqn:rotation-matrices}) were a representation of SO(3), and our three-dimensional angular momentum operators (\ref{eqn:rotation-generators}) were representations of its Lie algebra. Matrix exponentiating the generators as in (\ref{eqn:lie-algebra-generator}) can be used to produce the representation of the group if a representation of the Lie Algebra is known.
+
+\subsection{Physical consequences of the group theory explanation for spin}
+
+This new formalism connects directly to the definition used at the beginning of this section --- ``Angular momentum generates rotations.'' The connection is that ``rotations'' refers to the Lie group SO(3), which has the Lie algebra given in (\ref{eqn:angular-momentum-algebra}). The angular momentum operators we're looking for are the rotation generators, which are representations of this Lie algebra.
+
+One reason why this group theory framework is necessary is because (\ref{eqn:angular-momentum-algebra}) is not just the Lie algebra of SO(3). It is also the Lie algebra of SU(2), which is the set of unitary matrices which rotate a two-dimensional complex vector, rather than a three-dimensional real vector. Valid angular momentum operators could therefore be generators of SO(3) or SU(2).
+
+Another use of group theory is the mathematical result that all the faithful\footnote{A faithful representation is one where every group element corresponds to exactly one matrix. For odd dimensions, SU(2) is not faithful because every group element corresponds to two matrices which can be generated using $e^{i\bm \theta \cdot \bm S}$.} representations of SO(3) have odd dimensions, and all the representations of SU(2) have odd\footnote{Except, that is, for the trivial representation, where all the generators are the $1\times 1$ matrix with zero as the only element.} dimensions. Therefore, the spinor which the spin operators act on can have any number of dimensions $n$. If $n$ is even, then one uses representations of $\mathfrak{su}(2)$ as spin operators. If $n$ is odd, one uses representations of $\mathfrak{so}(3)$.
+
+This fact that the parity of $n$ changes what group the spin operators come from has several fascinating properties. Firstly, it means that the SU(2) spins may have different properties than the SO(3) spins. This is manifested in the spin-statistics theorem, which is described in the next section. It also means that since SU(2) acts on complex vectors and SO(3) acts on real vectors. This is crucial because, as noted in the previous chapter, complex particles have an electric charge. Thus, all SU(2) particles are automatically charged. SO(3) particles can be neutral or charged, because one can multiply them by a complex phase.
+
+Another result of group theory is that $\bm S^2 = \frac{n^2-1}{4}\mathds{1}$, where $\bm S^2 = S_x^2 + S_y^2 + S_z^2$. This is interesting because we define the spin of a particle $s$ such that the eigenvalue of the angular momentum operator $\bm S^2$ is $s(s+1)$ so that $s=\frac{n-1}{2}$. Thus, particles with half-integer spin $s$ have spinors of even dimension and are therefore represented by SU(2) and we refer to them as fermions. Integer spin particles, called bosons, have odd dimension spinors and are represented by SO(3).
+
+One final result of group theory is a list of what the spin operators actually are. For zero spin ($s=0$), the spinor has dimension 1, and the operators are all the $1\times 1$ matrices $(0)$. This is an incredibly boring case from the perspective of spin, and it is the reason why we were able to complete all of the previous chapter on spin-zero particles.
+
+Spin one-half particles have $n=2$, so that the spin operators are $2\times 2$ representations of $\mathfrak{su}(2)$ which are the Pauli matrices
+\begin{ec}
+  \sigma_1 = \parens{\begin{matrix}0&1\\1&0\end{matrix}},\qquad
+  \sigma_2 = \parens{\begin{matrix}0&-i\\i&0\end{matrix}},\qquad
+  \sigma_3 = \parens{\begin{matrix}1&0\\0&-1\end{matrix}}.
+\end{ec}
+Non-relativistic quantum mechanics courses usually skip the derivation of spin operators and merely state that they are equal to these Pauli matrices, partially because most of the particles dealt with in non-relativistic quantum mechanics are spin one-half so that the operators for other particles are unnecessary.
+
+Spin one particles have $n=3$, so that the spin operators are $3\times 3$ representations of $\mathfrak{so}(3)$. We have already written these matrices in (\ref{eqn:rotation-generators}) because $n=3$ is the representation used to rotate normal three-dimensional geometric vectors. This means that for spin-one particles (and only spin-one particles), spin is a true geometric vector which rotates normally and need not be understood in a quantum mechanical way. Photons are spin-one particles whose spin corresponds to their polarization, and classical electromagnetism only works to describe photons because of this fact --- their spin behaves like a classical vector and can be treated as such. For this reason, we sometimes call spin-one particles ``vector bosons.'' Vector bosons are able to play a special role in Lagrangians because their spin can be used as a Lorentz index to turn vector-valued quantities into scalar-valued quantities that can go into the Lagrangian. This allows them to act as ``gauge bosons,'' as described in the next chapter.
+
+Throughout the rest of this chapter, we will explore only the spin one-half case, saving spin-one for the next chapter.
+
+\section{The $\gamma$ Matrices and Relativistic Spin}
+\label{sec:clifford}
+In the last section, we used the invariance of spacetime under rotations to justify that spin is conserved. However, the full symmetry of spacetime is Lorentz symmetry, of which rotations is just one part. A general Lorentz transformation is 
+\begin{e}
+  {\Lambda^\mu}_\nu = \parens{
+    \begin{tabular}{c|ccc}
+      Time dilation & & Boosts & \\\hline
+       & & & \\
+      Boosts & & Rotations & \\
+       & & & \\
+    \end{tabular}
+  }
+  \label{eqn:boost-picture}
+\end{e}
+In this section, we will explore the influence of boosts on spin one-half particles. Even before this discussion, we can partially work out the answer due to the CPT theorem, which is also due to relativity.
+
+The CPT theorem states that quantum mechanics is invariant under CPT symmetry, but a spin one-half spinor $\hat \psi_L$ is not CPT invariant because it is charged and because its spin operators $\sigma^\mu$ have parity\footnote{The angular momentum operators have parity due to the $\epsilon_{ijk}$ in the angular momentum algebra (\ref{eqn:angular-momentum-algebra}).}. In the previous chapter, we saw that the antiparticle of a scalar particle $\phi$ was its complex conjugate $\phi^\dagger$, and we should therefore expect $\hat \psi_L^\dagger$ to be the antiparticle of $\hat \psi_L$. However, if we keep $\hat \psi_L$ as a two-component spinor, this does not solve our parity problem.
+
+The solution is to create another particle $\hat \psi_R$, which is the parity reverse of $\hat \psi_L$. Then we can create a four-component spinor out of both $\hat \psi_R$ and $\hat \psi_L$, known as a Dirac spinor,
+\begin{e}
+  \hat \psi = \parens{\begin{matrix}\hat\psi_L \\ \hat\psi_R^\dagger \end{matrix}}.
+\end{e}
+The spin operators on the larger spinor are 
+\begin{e}
+  \gamma^{i} = \parens{\begin{matrix}0 & \sigma^i \\ -\sigma^i & 0\end{matrix}}
+\end{e}
+which is a compact notation for a four-dimensional matrix. We also define the 
+timelike component of $\gamma$ as 
+\begin{e}
+  \gamma^0 = \parens{\begin{matrix}0 & \mathds{1} \\ \mathds{1} & 0\end{matrix}}.
+\end{e}
+By defining the four vectors $\sigma^\mu = (\mathds{1}, \sigma^i)$ and $\overline\sigma^\mu = (\mathds{1}, -\sigma^i)$, we can write the $\gamma^\mu$ matrices in a more compact form:
+\begin{e}
+  \gamma^\mu = \parens{\begin{matrix}0 & \sigma^\mu \\ \overline\sigma^\mu & 0 \end{matrix}}
+  \label{eqn:weyl-rep}
+\end{e}
+which are called the Dirac gamma matrices.
+
+To tell apart the two spinors, we also define a fifth matrix
+\begin{e}
+  \gamma^5 = \parens{\begin{matrix}\mathds{1} & 0 \\ 0 & -\mathds{1} \end{matrix}}.
+  \label{eqn:gamma-5}
+\end{e}
+because the eigenvectors of this matrix are $\hat \psi_L$ and $\hat \psi_R$, with eigenvalues $+1$ and $-1$ respectively. So this matrix separates the left and right components. In particular, $\frac{1 + \gamma_5}{2}$ selects out the left-handed component and removes the right-handed component, which will be crucial when we discuss the weak force.
+
+We define the antiparticle of $\hat \psi$ as $\overline \psi = \gamma^0 \hat \psi^\dagger$. Explicitly, this antiparticle is
+\begin{e}
+  \overline \psi = \parens{\begin{matrix}\hat\psi_R \\ \hat\psi_L^\dagger \end{matrix}}
+\end{e}
+which is truly the CPT reverse of $\hat \psi$. Thus, we needed to create a second particle $\hat \psi_R$ in order to make $\hat \psi$ consistent with relativity. For convenience, we put $\hat \psi_L$ and $\hat \psi_R$ into the same spinor, similarly to how we put $\phi_a$ and $\phi_b$ into one particle $\phi$ in the case of a complex scalar field in the previous chapter.
+
+Though this justification of $\hat \psi_L$ and $\hat \psi_R$ via CPT symmetry is easy to explain, it leaves several questions which are summarized below. Their answers are provided by the more lengthy derivation of the $\gamma^\mu$ matrices as generators of the Lorentz group, just as we derived the $\sigma$ matrices as generators of the rotation group. We spend the rest of the section performing this derivation to satisfy curiosity, though the rest of this book can be understood even if the rest of this section is skipped.
+
+The questions which are answered by investigating the generators of the Lorentz group are
+\begin{enumerate}
+  \item In what sense are $\hat\psi_L$ and $\hat\psi_R$ left- and right-handed? (They have different helicities)
+  \item For a free particle, how does the spinor behave? ($\psi_L$ and $\psi_R$ encode the spin of the particle times factors that are determined by its velocity.)
+  \item Does $\gamma^\mu$ transform as a four-vector under Lorentz boosts as the $\mu$ index suggests? (Yes.)
+  \item Are there other $4\times 4$ representations for $\gamma^\mu$? (Yes; this one is called the Weyl representation.)
+  \item What are the properties of the $\gamma^\mu$ matrices? (These are summarized in appendix \ref{app:gamma}.)
+\end{enumerate}
+
+The separation of four-dimensional spinors into two parts was historically crucial for two reasons. Firstly, it allowed us to use the Pauli matrices instead of the $\gamma^\mu$ matrices for decades, because the difference between $\psi_L$ and $\psi_R$ is only apparent when one performs a relativistic boost, and measurements of spin are usually made in one reference frame, where one only measures one of the two spinors. Secondly, Paul Dirac's discovery of $\gamma^\mu$ matrices was the first theoretical prediction of antimatter, which was first observed several years after. It was this discovery that drew attention to his Dirac equation, and later, QFT.
+
+\subsection{Generators of the Lorentz Group}
+
+A full four-dimensional sketch of boosts is given in (\ref{eqn:boost-picture}), and an example of a boost in two dimensions is 
+\begin{e}
+  \Lambda = \parens{\begin{matrix}
+    \cosh \gamma & \sinh\gamma\\
+    \sinh \gamma & \cosh\gamma\\
+  \end{matrix}}
+\end{e}
+Our first task is to add generators for boosts to our rotation generators in order to create the full set of generators of the Lorentz boosts $\Lambda$. A glance at the above example shows that the boosts are almost rotations, but they are symmetric and the trigonometric functions are replaced with hyperbolic trigonometric functions. A little more thought reveals that the additional generators for the boosts are 
+\begin{ec}
+  B_x = i\parens{\begin{matrix}0&1&0&0\\1&0&0&0\\0&0&0&0\\0&0&0&0\\\end{matrix}},\qquad
+  B_y = i\parens{\begin{matrix}0&0&1&0\\0&0&0&0\\1&0&0&0\\0&0&0&0\\\end{matrix}},\\
+  B_z = i\parens{\begin{matrix}0&0&0&1\\0&0&0&0\\0&0&0&0\\1&0&0&0\\\end{matrix}},
+  \label{eqn:boost-generators}
+\end{ec}
+which can be used to verify the example. To write an algebra that contains both the boost generators $\bm B$ and the rotation generators $\bm S$ we define an antisymmetric tensor of matrices $\Sigma$ where the entries are generators. The timelike entries are boosts $\Sigma^{0i} = B^i$ and the spacelike components are rotations $\Sigma^{12} = S_z$, $\Sigma_{13}=-S_y$, and $\Sigma_{23}=S_x$\footnote{This structure of the $\Sigma$ tensor may seem odd, but it is very similar to the layout of the electromagnetic tensor, also known as the Faraday tensor, where the electric field is laid along the timelike components and the magnetic field along the spacelike components.}. The $\Sigma$ tensor then satisfies the algebra
+\begin{e}
+  \brackets{\Sigma^{\mu\nu},\Sigma^{\rho\sigma}} = i\parens{\eta^{\nu\sigma}\Sigma^{\mu\rho} + \eta^{\mu\rho}\Sigma^{\nu\sigma} -\eta^{\mu\sigma}\Sigma^{\nu\rho} - \eta^{\nu\rho}\Sigma^{\mu\sigma}}
+  \label{eqn:lorentz-algebra}
+\end{e}
+where $\eta^{\mu\nu}$ is the spacetime metric. This equation is called the \emphi{Lorentz algebra}.
+
+We have done nothing except put the spin operators in relativistic language by adding in boost generators so far. Because there are now six generators, the $\Sigma$ tensor can no longer be considered angular momentum. However, we can use a trick due to Dirac to reduce the tensor to four components by defining a four-vector of matrices $\gamma^\mu$ such that
+\begin{e}
+  \Sigma^{\mu\nu} = -\frac{i}{4}\brackets{\gamma^\mu, \gamma^\nu}.
+  \label{eqn:def-gamma-matrices}
+\end{e}
+Then the Lie algebra of $\Sigma^{\mu\nu}$ implies the following Lie algebra for $\gamma^\mu$:
+\begin{e}
+  \braces{\gamma^\mu, \gamma^\nu} = 2\eta^{\mu\nu}
+  \label{eqn:clifford-algebra}
+\end{e}
+where $\braces{\cdot,\cdot}$ is the anticommutator. (\ref{eqn:clifford-algebra}) is called the \emphi{Clifford algebra} or the Dirac algebra, and its representation $\gamma^\mu$ are called the \emphi{Dirac gamma matrices}.
+
+We have finally arrived at a four-vector $\gamma^\mu$ which satisfies the properties of a relativistic spin operator. Its spacelike components should be related to the spin operators derived in the previous section because those operators were the spacelike components of $\Sigma^{\mu\nu}$, and the commutator (\ref{eqn:def-gamma-matrices}) merely transforms two Pauli matrices $\gamma^\mu$ and $\gamma^\nu$ into the third Pauli matrix due to the angular momentum algebra (\ref{eqn:angular-momentum-algebra}). The only challenge is the that the boosts prevent the $\gamma$ matrices from being odd-dimensional. In order to create them, we must double the dimensions of the old spin operators.
+
+One can manually check that (\ref{eqn:weyl-rep}) is a valid representation of the $\gamma^\mu$ matrices --- i.e., it satisfies th Clifford algebra. Any other representation that satisfies the Clifford algebra is also valid but we will not need them for this book. Likewise, there is no point in giving the additional $6\times 6$ and higher-dimensional representations of the Clifford algebra because we will not use them, but they do exist.
+
+\subsection{Lorentz boosting the $\gamma^\mu$ matrices}
+We have defined the $\gamma^\mu$ matrices with a spacetime index, so far just because there were four $\gamma^\mu$ matrices and spacetime is four-dimensional. However, this index is not just for show. It is a true spacetime index in that it indicates that the $\gamma^\mu$ matrices transform as vectors under Lorentz transformations.
+
+To see this, we will first act on the $\gamma^{\mu}$ matrices with the spin representation of a boost $\Lambda$. This is sometimes called an ``internal boost'' because it affects only the spin. We can write $\Lambda$ as an exponential using the $\Sigma^{\mu \nu}$ generators of the Lorentz algebra which we just worked out:
+\begin{e}
+  \Lambda = e^{-i \theta{\mu\nu}\Sigma^{\mu\nu}}.
+\end{e}
+In principle, $\theta_{\mu\nu}$ can be any tensor of constants. However, because $\Sigma^{\mu\nu}$ is antisymmetric, only the antisymmetric part of $\theta_{\mu\nu}$ will matter. Acting with $\Lambda$ on the $\gamma^\mu$ matrices gives the transformation 
+\begin{e}
+  \gamma^{\mu} \rightarrow \Lambda^{-1} \gamma^{\mu} \Lambda.
+\end{e}
+Remember that the $\Sigma^{\mu\nu}$ matrices do not commute with $\gamma^{\mu}$.
+
+If we were to transform the $\gamma^\mu$ as a spacetime vector rather than as a set of matrices, then we would get
+\begin{e}
+  \gamma^{\mu} \rightarrow {\Lambda^\mu}_\nu \gamma^\nu.
+\end{e}
+where this time, ${\Lambda^\mu}_\nu$ is a boost of spacetime, meaning that its entries are numbers and not matrices. This is called an ``external boost'' because it explicitly does not affect spin.
+
+It helps to write the ${\Lambda^\mu}_\nu$ matrix as an infinitesimal boost, in which case we can use the generators of the Lorentz algebra that we derived above in (\ref{eqn:boost-generators}), which we now call $J^{\mu\nu}$ to distinguish them from the generalized spin operators $\Sigma^{\mu\nu}$. Then ${\Lambda^\mu}_\nu = \delta^\mu_\nu + {\parens{\frac{1}{2}\omega_{\alpha\beta} J^{\alpha\beta}}^\mu}_\nu$. \jtd{Some factors of 1/2 are wrong}. Using this fact, a few calculations using the Lorentz algebra (\ref{eqn:lorentz-algebra}) and Clifford algebra (\ref{eqn:clifford-algebra}) give that the internal and external boosts are identical: that is,
+\begin{e}
+  \Lambda^{-1}\gamma^{\mu} \Lambda = \Lambda{^\mu}_\nu \gamma^\nu.
+\end{e}
+This confirms that $\gamma^{\mu}$ transforms like a four-vector.
+
+\subsection{Helicity and the Free Particle Spinor}
+
+A last question we must answer is what the $\psi_L$ and $\psi_R$ components of a Dirac spinor are. The answer is that they both express the alignment of a particle's spin with its velocity --- called helicity --- which we will show by boosting a particle with spin from its rest frame into the lab frame and showing how its spinor behaves.
+
+This boost is a good trick to learn since it connects a particle's Dirac spinor to the spin which is actually measured. To predict a spin measurement, we generate a prediction for the Dirac spinor and then boost to the lab frame to predict what spin it truly measures. However, most particle detection methods are not sensitive to spin, in which case the spinor can be ignored and this boost technology is not necessary.
+
+To boost a spinor, we act on it with $\Lambda = e^{i\omega_{\mu\nu}\Sigma^{\mu\nu}}$. Suppose for now that $\omega_{\mu\nu}$ is all zero except $\omega_{30}=-\omega_{03}=\epsilon$ which is small. This is a boost in the $+z$ direction, and has the effect of
+\begin{e}
+  \Lambda \psi = \parens{\mathds{1} + \epsilon B_z}\psi.
+\end{e}
+Suppose that the initial state $\psi$ is just a $\psi_R$ particle in the down state. $\psi = (0,0,0,1)^\dagger$. Then the boosted spinor is
+\begin{e}
+  \Lambda \psi = (\epsilon,0,0,1).
+\end{e}
+It appears that the left-handed spinor $\psi_L$ has gained a small component in the up state due to this boost. A stronger boost will increase the $\psi_L$ component and decrease the $\psi_R$ component.
+\jtd{Math is wrong, and I might be using inconsistent reps.}
+
+This is an indication that $\psi_R$ and $\psi_L$ reflect how much a particle's spin is aligned with its velocity. As we boost and reduce the velocity of the particle, the alignment equalizes. If we boosted too much, the alignment would reverse. This alignment, more technically defined as the projection of a particle's spin onto its momentum, is called \emphi{helicity} and is conserved. Thus, a $\psi_L$ with left-handed helicity will remain left-handed until interacted with. This is why we may insert it into the spinor.
+
+\jtd{Rewrite this section to actually perform this boost and show the spinor components as a function of velocity}.
+
+
+
+\section{Spin Statistics Theorem: Fermions Anticommute}
+So far, we have discussed the structure of a spinor $\hat \psi$, which is used to define $n$PCFs. However, the other side of the QFT principle of least action requires us to integrate over numbers $\psi$, not operators. We will end this chapter by discussing how to define the number $\psi$, but first we'll start with a crucial result of QFT: the spin-statistics theorem.
+
+Suppose 
+
+\jtd{Spin statistics}
+
+\jtd{Grassman variables.}
+
+\section{Feynman Rules for Fermions}
+
+\section{Yukawa Theory Potential}
+
+\section{Pion Model of the Weak Force \& Fermionic Spontaneous Symmetry Breaking}
+
+\section{Yukawa Theory Electric Dipole Moment}

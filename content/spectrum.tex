@@ -1,0 +1,25 @@
+\chapter{Two Point Correlation Function Spectrum}
+\label{chap:spectrum}
+
+The $n$PCFs were connected to scattering in the previous chapter, but the 2PCF in particular has an intriguing property known as the K\"all\'en-Lehmann spectral representation which we will remark in this chapter. Namely, the 2PCF $\braket{\hat \psi(p)\hat\psi^\dagger(q)}$ summarizes all of the important properties of the particle $\psi$, including its mass, decay rate, bound states, and scattering.
+
+Let's build intuition for $\braket{\hat \psi(p)\hat\psi^\dagger(q)}$ by treating it in a scattering scenario as an $S$-matrix element. It would represent the probability for a particle to scatter from momentum $p$ to momentum $q$, meaning $q=p$ by conservation of momentum. Also, due to Lorentz invariance, $\braket{\hat \psi(p)\hat\psi^\dagger(p)}$ cannot depend on the four-vector $p^\mu$. It can only depend on the Lorentz invariant quantity $p^2$ and constants --- that is, $\braket{\hat \psi(p)\hat\psi^\dagger(p)}$ is a function of one variable $p^2$.
+
+We expect the on-shell constraint to force $p^2=m^2$, meaning that $\braket{\hat \psi(p)\hat\psi^\dagger(p)}$ should blow up at $p^2=m^2$ in order to suppress $p^2\neq m^2$ effects. To show this, we define the \emphi{spectral-density} $\rho(\mu^2)$ such that
+\begin{e}
+  \braket{\hat \psi(p)\hat\psi^\dagger(p)} = \int d(\mu^2) \rho(\mu^2) \frac{i}{p^2-\mu^2}
+  \label{eqn:spectral-density}
+\end{e}
+and the on-shell constraint requires $\rho(\mu^2) = \delta(\mu^2-m^2)$. That is, the spectrum has a Dirac spike at $m^2$.
+
+We have produced this equation only using our interpretation of $\braket{\hat \psi(p)\hat\psi^\dagger(q)}$ as an $S$ matrix element and requiring the on-shell constraint. In the next chapter, we will prove that (\ref{eqn:spectral-density}) is true via the QFT principle of least action in a non-interacting theory.
+
+In the case of interactions, the story is complicated however. Interactions allow bound states between particles to exist, so that the $\psi$ and $\psi^\dagger$ particles might not need be interpreted as plane wave states but as constituent particles in the bound state. Then the corresponding pole in $\rho$ will be shifted by the binding energy of the bound state. For example, an electron and a positron can exist together in a bound state known as positronium, which has a ground state energy of $E=2m-\SI{6.8}{\electronvolt}$ where $m=\SI{511}{\kilo\electronvolt}$ is the mass of the electron.
+
+Positronium would place an additional pole in $\rho(p^2)$ at $p^2 = E^2$, except for the fact that positronium decays usually into two gamma rays with a lifetime of $\tau = 0.12$ ns. This decay has the effect of blurring out the pole into a \emphi{Breit-Wigner} distribution 
+\begin{e}
+  \rho(p^2) \propto \frac{1}{(p^2 - E^2)^2 + E^2 \Gamma^2}
+\end{e}
+where $\Gamma = \frac{1}{\tau} = \frac{1}{\SI{0.12}{\nano\second}}$ is the decay width. When the $\psi$ particle itself is unstable, the $p^2=m^2$ pole is similarly broadened. When detecting particles in a collider, this Breit-Wigner distribution is observed and its peak used to define the mass of the particle.
+
+\jtd{scattering}
