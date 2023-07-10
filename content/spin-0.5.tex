@@ -98,9 +98,75 @@ Spin one particles have $n=3$, so that the spin operators are $3\times 3$ repres
 
 Throughout the rest of this chapter, we will explore only the spin one-half case, saving spin-one for the next chapter.
 
-\section{The $\gamma$ Matrices and Relativistic Spin}
+\subsection{The Lagrangian of a Massless Fermion}
+
+Since we are specializing to the spin one-half case, the spin operators are the Pauli matrices, which can be combined into a three-dimensional vector $\bm \sigma = (\sigma_1, \sigma_2, \sigma_3)$. To make a relativistic version of the spin operator, we need to graduate $\bm \sigma$ to a four-vector $\sigma^\mu$ by adding a time component, which corresponds to Lorentz boost operator for spin.
+
+This section has so far considered only rotations, so we do not know how operators transform under spin. As a simplification, we'll consider a massless fermion, which can only move at the speed of light. Thus, boosting cannot change its state, and $\sigma^0$ should just be the identity matrix:
+\begin{e}
+  \sigma^\mu = (\mathds{1}, \bm \sigma).
+\end{e}
+
+Now that we have relativistic spin operators, we can derive the Lagrangian of this massless Fermion by writing down all terms that satisfy the symmetries of QFT. Firstly, the Lagrangian must be a real scalar rather than spinor-valued, so that $\psi$ cannot exist alone. It must be paired with another spinor as in $\psi^\dagger \psi$, which indicates the dot product between two spinors\footnote{Traditionally, we use matrix notation for spinors and index notation for spacetime indices. Thus, a spinor dot product is $\psi^\dagger \psi$ but a four-vector dot product is $k^\mu k_\mu$.}.
+
+Another symmetry of the Lagrangian is Lorentz transformations, which implies that all Lorentz indices must be contracted. In the scalar field theory, the only object with Lorentz indices we had access to was the derivative $\del_\mu$, but now we also have the spin operators $\sigma^\mu$. Thus, the available terms are of the form
+$$\psi^\dagger \psi \qquad \psi^\dagger \sigma^\mu \del_\mu \psi \qquad \psi^\dagger \del^2 \psi.$$
+We did not include $\psi^\dagger \sigma^2 \psi$ because $\sigma^2 = 4\mathds{1}$, so this term is redundant with the first.
+
+The Lagrangian must also be invariant under ``Internal'' Lorentz transformations, which transform spinors rather than spacetime. These transformations are of the form $\psi \rightarrow \Lambda \psi$ where $\Lambda = \expp{\frac{1}{2}\sigma^\mu \omega_\mu}$ where $\omega_\mu$ are arbitrarily chosen constants. Since $\sigma^\mu$ are all hermitian, $\Lambda$ is unitary. Thus, $\psi^\dagger \psi \rightarrow \psi^\dagger \Lambda^\dagger \Lambda \psi = \psi^\dagger \psi$ and all of the above terms are invariant under these internal transformations.
+
+A final symmetry to consider is CPT symmetry, which actually forbids the first term --- specifically, due to parity (P). Spinors are invariant under time (T) symmetry, and $\psi \rightarrow \psi^\dagger$ under charge (C) symmetry, so that $\psi^\dagger \psi$ is invariant under CT. But under parity, angular momentum changes direction because it is a cross product, so the spinor cannot be invariant under P.
+
+The last two terms are allowed by all the symmetries of the Lagrangian, but we usually do not include the last term because its dimension is too high. To compute its dimension, consider the middle term which must have dimension 4 so that $S = \int \mathcal{L} d^4x$ is dimensionless (recall that $d^4 x$ has dimension $-4$). Since $\sigma^\mu$ is dimensionless and $\del_\mu$ has dimension 1, this implies that the spinor $\psi$ has dimension $3/2$, in contrast to a scalar field's dimension $[\phi] = 1$. Therefore, the last term $\psi^\dagger \del^2 \psi$ has dimension 5. To bring it to the correct dimension, we must multiply by a number $g$ which has dimension $-1$, and therefore all the scattering cross-sections that use this term will contain a factor of $(gE)^n$, where $n>0$ is an integer and $E$ is the energy of the scattering. But scattering is generally done at low energies, so that $gE$ is small. Therefore, this term has a small impact on the physics of fermions and we do not include it.
+
+The final Lagrangian for a massless fermion is thus
+\begin{e}
+  \mathcal{L} = \psi^\dagger \sigma^\mu \del_\mu \psi.
+\end{e}
+This gives the famous Dirac equation (\ref{eqn:dirac}), when variational calculus is used to compute the corresponding differential equation.
+
+
+\section{Massive Fermions and the $\gamma$ Matrices}
 \label{sec:clifford}
-In the last section, we used the invariance of spacetime under rotations to justify that spin is conserved. However, the full symmetry of spacetime is Lorentz symmetry, of which rotations is just one part. A general Lorentz transformation is 
+
+The Lagrangian we just derived does not contain a mass term because we had assumed a massless fermion in the above discussion. We could try to add a mass term of the form $\psi^\dagger \psi$ --- inspired by the $\phi^*\phi$ mass term of a scalar field --- but this is incorrect because $\psi^\dagger \psi$ is not CPT invariant as we discussed above.
+
+The solution is to introduce another particle. We call the original spinor $\psi_L$and we define its transformation under parity as $P\psi_L = \psi_R$. Likewise, $P \psi_R = \psi_L$ since $P^2 = \mathds{1}$. We say that $\psi_L$ has ``left helicity'' and $\psi_R$ has ``right helicity.'' A more practical definition of \emphi{helicity} is that it is the projection of spin against the velocity of the particle\footnote{This definition comes from the fact that we know helicity must flip under parity transformations, and that spin also flips under parity transformations while normal four-vectors do not. So the projection of spin against a four-vector --- of which velocity is the only available one --- flips under helicity}.
+
+The $\psi^\dagger \psi$ (now $\psi_L^\dagger \psi_L$) can be made parity invariant by converting it to $\psi_R^\dagger \psi_L + \psi_L^\dagger \psi_R$. The new Lagrangian is 
+\begin{e}
+  \mathcal{L} = \psi_L^\dagger \sigma^\mu \del_\mu \psi_L + \psi_R^\dagger \overline \sigma^\mu \del_\mu \psi_R + m(\psi_R^\dagger \psi_L + \psi_L^\dagger \psi_R)
+\end{e}
+where $\overline \sigma^{\mu} = (\mathds{1}, -\bm \sigma)$ is the parity reflection of $\sigma^\mu$ and $m$ is the mass.
+
+It is convenient to combine $\psi_L$ and $\psi_R$ into one spinor called the Dirac spinor and the spin matrices into four-by four matrices called the Dirac $\gamma$ matrices:
+\begin{e}
+  \hat \psi = \parens{\begin{matrix}\hat\psi_L \\ \hat\psi_R^\dagger \end{matrix}}.
+\end{e}
+\begin{e}
+  \gamma^\mu = \parens{\begin{matrix}0 & \sigma^\mu \\ \overline \sigma^\mu & 0\end{matrix}}.
+  \label{eqn:weyl-rep}
+\end{e}
+The $\psi_L$ and $\psi_R$ components can be extracted back out of $\psi$ via another matrix
+\begin{e}
+  \gamma^5 = \parens{\begin{matrix}\mathds{1} & 0 \\ 0 & -\mathds{1} \end{matrix}}.
+  \label{eqn:gamma-5}
+\end{e}
+because the eigenvectors of this matrix are $\hat \psi_L$ and $\hat \psi_R$, with eigenvalues $+1$ and $-1$ respectively. So this matrix separates the left and right components. In particular, $\frac{1 + \gamma_5}{2}$ selects out the left-handed component and removes the right-handed component, which will be crucial when we discuss the weak force.
+
+With these changes in notation, the Lagrangian is now written as
+\begin{e}
+  \mathcal{L} = \psi^\dagger \gamma^0 (\gamma^\mu \del_\mu - m) \psi.
+\end{e}
+In an effort to simplify things even further, a common approach is to define the new symbols $\overline \psi = \psi^\dagger \gamma^0$ and $\gamma^\mu \del_\mu = \slashed \del$. Then
+\begin{e}
+  \mathcal{L} = \overline \psi (i\slashed \del - m) \psi.
+  \label{eqn:free-fermion-lagrangian}
+\end{e}
+This is called the \emph{Dirac Lagrangian} and it is a fully consistent relativistic theory of a fermion.
+\jtd{Some $i$ factors missing.}
+
+The remainder of this book can be understood with just this information, but the reader might be curious as to whether introducing a new particle $\psi_R$ was the only resolution to the problem of CPT invariance. A fascinating way to answer this question is to derive the Dirac Lagrangian and the $\gamma$ matrices from a different perspective: we will find the generators of the Lorentz transformations. Lorentz transformations take the form
 \begin{e}
   {\Lambda^\mu}_\nu = \parens{
     \begin{tabular}{c|ccc}
@@ -112,55 +178,9 @@ In the last section, we used the invariance of spacetime under rotations to just
   }
   \label{eqn:boost-picture}
 \end{e}
-In this section, we will explore the influence of boosts on spin one-half particles. Even before this discussion, we can partially work out the answer due to the CPT theorem, which is also due to relativity.
+so that these generators will include the generators of rotation, which are the Pauli spin matrices. However, the additional generators due to boosts will force us to use the $\gamma^\mu$ matrices instead of the $\sigma^\mu$ matrices. The use of four-component spinors is therefore required for massive fermions.
 
-The CPT theorem states that quantum mechanics is invariant under CPT symmetry, but a spin one-half spinor $\hat \psi_L$ is not CPT invariant because it is charged and because its spin operators $\sigma^\mu$ have parity\footnote{The angular momentum operators have parity due to the $\epsilon_{ijk}$ in the angular momentum algebra (\ref{eqn:angular-momentum-algebra}).}. In the previous chapter, we saw that the antiparticle of a scalar particle $\phi$ was its complex conjugate $\phi^\dagger$, and we should therefore expect $\hat \psi_L^\dagger$ to be the antiparticle of $\hat \psi_L$. However, if we keep $\hat \psi_L$ as a two-component spinor, this does not solve our parity problem.
-
-The solution is to create another particle $\hat \psi_R$, which is the parity reverse of $\hat \psi_L$. Then we can create a four-component spinor out of both $\hat \psi_R$ and $\hat \psi_L$, known as a Dirac spinor,
-\begin{e}
-  \hat \psi = \parens{\begin{matrix}\hat\psi_L \\ \hat\psi_R^\dagger \end{matrix}}.
-\end{e}
-The spin operators on the larger spinor are 
-\begin{e}
-  \gamma^{i} = \parens{\begin{matrix}0 & \sigma^i \\ -\sigma^i & 0\end{matrix}}
-\end{e}
-which is a compact notation for a four-dimensional matrix. We also define the 
-timelike component of $\gamma$ as 
-\begin{e}
-  \gamma^0 = \parens{\begin{matrix}0 & \mathds{1} \\ \mathds{1} & 0\end{matrix}}.
-\end{e}
-By defining the four vectors $\sigma^\mu = (\mathds{1}, \sigma^i)$ and $\overline\sigma^\mu = (\mathds{1}, -\sigma^i)$, we can write the $\gamma^\mu$ matrices in a more compact form:
-\begin{e}
-  \gamma^\mu = \parens{\begin{matrix}0 & \sigma^\mu \\ \overline\sigma^\mu & 0 \end{matrix}}
-  \label{eqn:weyl-rep}
-\end{e}
-which are called the Dirac gamma matrices.
-
-To tell apart the two spinors, we also define a fifth matrix
-\begin{e}
-  \gamma^5 = \parens{\begin{matrix}\mathds{1} & 0 \\ 0 & -\mathds{1} \end{matrix}}.
-  \label{eqn:gamma-5}
-\end{e}
-because the eigenvectors of this matrix are $\hat \psi_L$ and $\hat \psi_R$, with eigenvalues $+1$ and $-1$ respectively. So this matrix separates the left and right components. In particular, $\frac{1 + \gamma_5}{2}$ selects out the left-handed component and removes the right-handed component, which will be crucial when we discuss the weak force.
-
-We define the antiparticle of $\hat \psi$ as $\overline \psi = \gamma^0 \hat \psi^\dagger$. Explicitly, this antiparticle is
-\begin{e}
-  \overline \psi = \parens{\begin{matrix}\hat\psi_R \\ \hat\psi_L^\dagger \end{matrix}}
-\end{e}
-which is truly the CPT reverse of $\hat \psi$. Thus, we needed to create a second particle $\hat \psi_R$ in order to make $\hat \psi$ consistent with relativity. For convenience, we put $\hat \psi_L$ and $\hat \psi_R$ into the same spinor, similarly to how we put $\phi_a$ and $\phi_b$ into one particle $\phi$ in the case of a complex scalar field in the previous chapter.
-
-Though this justification of $\hat \psi_L$ and $\hat \psi_R$ via CPT symmetry is easy to explain, it leaves several questions which are summarized below. Their answers are provided by the more lengthy derivation of the $\gamma^\mu$ matrices as generators of the Lorentz group, just as we derived the $\sigma$ matrices as generators of the rotation group. We spend the rest of the section performing this derivation to satisfy curiosity, though the rest of this book can be understood even if the rest of this section is skipped.
-
-The questions which are answered by investigating the generators of the Lorentz group are
-\begin{enumerate}
-  \item In what sense are $\hat\psi_L$ and $\hat\psi_R$ left- and right-handed? (They have different helicities)
-  \item For a free particle, how does the spinor behave? ($\psi_L$ and $\psi_R$ encode the spin of the particle times factors that are determined by its velocity.)
-  \item Does $\gamma^\mu$ transform as a four-vector under Lorentz boosts as the $\mu$ index suggests? (Yes.)
-  \item Are there other $4\times 4$ representations for $\gamma^\mu$? (Yes; this one is called the Weyl representation.)
-  \item What are the properties of the $\gamma^\mu$ matrices? (These are summarized in appendix \ref{app:gamma}.)
-\end{enumerate}
-
-The separation of four-dimensional spinors into two parts was historically crucial for two reasons. Firstly, it allowed us to use the Pauli matrices instead of the $\gamma^\mu$ matrices for decades, because the difference between $\psi_L$ and $\psi_R$ is only apparent when one performs a relativistic boost, and measurements of spin are usually made in one reference frame, where one only measures one of the two spinors. Secondly, Paul Dirac's discovery of $\gamma^\mu$ matrices was the first theoretical prediction of antimatter, which was first observed several years after. It was this discovery that drew attention to his Dirac equation, and later, QFT.
+Along the way, we will discover many useful properties of the $\gamma^\mu$ matrices, find how spinors transform under Lorentz transformations, and show that many forms of the $\gamma^\mu$ matrices exist beyond (\ref{eqn:eqn:weyl-rep}).
 
 \subsection{Generators of the Lorentz Group}
 
@@ -173,9 +193,9 @@ A full four-dimensional sketch of boosts is given in (\ref{eqn:boost-picture}), 
 \end{e}
 Our first task is to add generators for boosts to our rotation generators in order to create the full set of generators of the Lorentz boosts $\Lambda$. A glance at the above example shows that the boosts are almost rotations, but they are symmetric and the trigonometric functions are replaced with hyperbolic trigonometric functions. A little more thought reveals that the additional generators for the boosts are 
 \begin{ec}
-  B_x = i\parens{\begin{matrix}0&1&0&0\\1&0&0&0\\0&0&0&0\\0&0&0&0\\\end{matrix}},\qquad
-  B_y = i\parens{\begin{matrix}0&0&1&0\\0&0&0&0\\1&0&0&0\\0&0&0&0\\\end{matrix}},\\
-  B_z = i\parens{\begin{matrix}0&0&0&1\\0&0&0&0\\0&0&0&0\\1&0&0&0\\\end{matrix}},
+  B_x = i\parens{\begin{matrix}0&1&0&0\\-1&0&0&0\\0&0&0&0\\0&0&0&0\\\end{matrix}},\qquad
+  B_y = i\parens{\begin{matrix}0&0&1&0\\0&0&0&0\\-1&0&0&0\\0&0&0&0\\\end{matrix}},\\
+  B_z = i\parens{\begin{matrix}0&0&0&1\\0&0&0&0\\0&0&0&0\\-1&0&0&0\\\end{matrix}},
   \label{eqn:boost-generators}
 \end{ec}
 which can be used to verify the example. To write an algebra that contains both the boost generators $\bm B$ and the rotation generators $\bm S$ we define an antisymmetric tensor of matrices $\Sigma$ where the entries are generators. The timelike entries are boosts $\Sigma^{0i} = B^i$ and the spacelike components are rotations $\Sigma^{12} = S_z$, $\Sigma_{13}=-S_y$, and $\Sigma_{23}=S_x$\footnote{This structure of the $\Sigma$ tensor may seem odd, but it is very similar to the layout of the electromagnetic tensor, also known as the Faraday tensor, where the electric field is laid along the timelike components and the magnetic field along the spacelike components.}. The $\Sigma$ tensor then satisfies the algebra
@@ -195,13 +215,10 @@ Then the Lie algebra of $\Sigma^{\mu\nu}$ implies the following Lie algebra for 
   \braces{\gamma^\mu, \gamma^\nu} = 2\eta^{\mu\nu}
   \label{eqn:clifford-algebra}
 \end{e}
-where $\braces{\cdot,\cdot}$ is the anticommutator. (\ref{eqn:clifford-algebra}) is called the \emphi{Clifford algebra} or the Dirac algebra, and its representation $\gamma^\mu$ are called the \emphi{Dirac gamma matrices}.
+where $\braces{\cdot,\cdot}$ is the anticommutator. (\ref{eqn:clifford-algebra}) is called the \emphi{Clifford algebra} or the Dirac algebra, and its representation $\gamma^\mu$ are called the Dirac $\gamma^\mu$ matrices. One can manually check that (\ref{eqn:weyl-rep}) is a valid representation of the $\gamma^\mu$ matrices --- i.e., it satisfies th Clifford algebra. Any other representation that satisfies the Clifford algebra is also valid but we will not need them for this book. Likewise, there is no point in giving the additional $6\times 6$ and higher-dimensional representations of the Clifford algebra because we will not use them, but they do exist.
 
-We have finally arrived at a four-vector $\gamma^\mu$ which satisfies the properties of a relativistic spin operator. Its spacelike components should be related to the spin operators derived in the previous section because those operators were the spacelike components of $\Sigma^{\mu\nu}$, and the commutator (\ref{eqn:def-gamma-matrices}) merely transforms two Pauli matrices $\gamma^\mu$ and $\gamma^\nu$ into the third Pauli matrix due to the angular momentum algebra (\ref{eqn:angular-momentum-algebra}). The only challenge is the that the boosts prevent the $\gamma$ matrices from being odd-dimensional. In order to create them, we must double the dimensions of the old spin operators.
 
-One can manually check that (\ref{eqn:weyl-rep}) is a valid representation of the $\gamma^\mu$ matrices --- i.e., it satisfies th Clifford algebra. Any other representation that satisfies the Clifford algebra is also valid but we will not need them for this book. Likewise, there is no point in giving the additional $6\times 6$ and higher-dimensional representations of the Clifford algebra because we will not use them, but they do exist.
-
-\subsection{Lorentz boosting the $\gamma^\mu$ matrices}
+\subsection{Lorentz Boosting Spinors}
 We have defined the $\gamma^\mu$ matrices with a spacetime index, so far just because there were four $\gamma^\mu$ matrices and spacetime is four-dimensional. However, this index is not just for show. It is a true spacetime index in that it indicates that the $\gamma^\mu$ matrices transform as vectors under Lorentz transformations.
 
 To see this, we will first act on the $\gamma^{\mu}$ matrices with the spin representation of a boost $\Lambda$. This is sometimes called an ``internal boost'' because it affects only the spin. We can write $\Lambda$ as an exponential using the $\Sigma^{\mu \nu}$ generators of the Lorentz algebra which we just worked out:
@@ -217,51 +234,250 @@ Remember that the $\Sigma^{\mu\nu}$ matrices do not commute with $\gamma^{\mu}$.
 If we were to transform the $\gamma^\mu$ as a spacetime vector rather than as a set of matrices, then we would get
 \begin{e}
   \gamma^{\mu} \rightarrow {\Lambda^\mu}_\nu \gamma^\nu.
+  \label{eqn:gamma-transformation}
 \end{e}
 where this time, ${\Lambda^\mu}_\nu$ is a boost of spacetime, meaning that its entries are numbers and not matrices. This is called an ``external boost'' because it explicitly does not affect spin.
 
-It helps to write the ${\Lambda^\mu}_\nu$ matrix as an infinitesimal boost, in which case we can use the generators of the Lorentz algebra that we derived above in (\ref{eqn:boost-generators}), which we now call $J^{\mu\nu}$ to distinguish them from the generalized spin operators $\Sigma^{\mu\nu}$. Then ${\Lambda^\mu}_\nu = \delta^\mu_\nu + {\parens{\frac{1}{2}\omega_{\alpha\beta} J^{\alpha\beta}}^\mu}_\nu$. \jtd{Some factors of 1/2 are wrong}. Using this fact, a few calculations using the Lorentz algebra (\ref{eqn:lorentz-algebra}) and Clifford algebra (\ref{eqn:clifford-algebra}) give that the internal and external boosts are identical: that is,
+It helps to write the ${\Lambda^\mu}_\nu$ matrix as an infinitesimal boost, in which case we can use the generators of the Lorentz algebra that we derived above in (\ref{eqn:boost-generators}), which we now call $J^{\mu\nu}$ to distinguish them from the generalized spin operators $\Sigma^{\mu\nu}$. Then ${\Lambda^\mu}_\nu = \delta^\mu_\nu + {\parens{\frac{1}{2}\omega_{\alpha\beta} J^{\alpha\beta}}^\mu}_\nu$. A helpful identity of $\gamma^\mu$ matrices is that
+\begin{e}
+  \brackets{\gamma^\alpha, \Sigma^{\mu \nu}} = {(J^{\mu \nu})^\alpha}_\beta \gamma^\beta
+  \label{eqn:gamma-sigma-commutator}
+\end{e}
+Using this fact, a few calculations using the Lorentz algebra (\ref{eqn:lorentz-algebra}) and Clifford algebra (\ref{eqn:clifford-algebra}) give that the internal and external boosts are identical: that is,
 \begin{e}
   \Lambda^{-1}\gamma^{\mu} \Lambda = \Lambda{^\mu}_\nu \gamma^\nu.
 \end{e}
 This confirms that $\gamma^{\mu}$ transforms like a four-vector.
 
-\subsection{Helicity and the Free Particle Spinor}
+\subsection{Finding a Lorentz Invariant Mass Term}
+We have now derived the $\gamma^\mu$ matrices and shown that they can be contracted with $\del_\mu$, reproducing the massless Dirac Lagrangian. In our previous discussion, we needed to define $\overline \psi = \psi^\dagger \gamma^0$ in order to include a mass term so that $\overline \psi \psi$ is Lorentz invariant. The reason why $\psi^\dagger \psi$ is not Lorentz invariant can now be seen mathematically from the fact that $\gamma^\mu$ are not all hermitian so that $\Lambda$ is not unitary. Thus, $\psi^\dagger \psi \rightarrow \psi^\dagger \Lambda^\dagger \Lambda \psi \neq \psi^\dagger \psi$ under a Lorentz transformation.
 
-A last question we must answer is what the $\psi_L$ and $\psi_R$ components of a Dirac spinor are. The answer is that they both express the alignment of a particle's spin with its velocity --- called helicity --- which we will show by boosting a particle with spin from its rest frame into the lab frame and showing how its spinor behaves.
-
-This boost is a good trick to learn since it connects a particle's Dirac spinor to the spin which is actually measured. To predict a spin measurement, we generate a prediction for the Dirac spinor and then boost to the lab frame to predict what spin it truly measures. However, most particle detection methods are not sensitive to spin, in which case the spinor can be ignored and this boost technology is not necessary.
-
-To boost a spinor, we act on it with $\Lambda = e^{i\omega_{\mu\nu}\Sigma^{\mu\nu}}$. Suppose for now that $\omega_{\mu\nu}$ is all zero except $\omega_{30}=-\omega_{03}=\epsilon$ which is small. This is a boost in the $+z$ direction, and has the effect of
+Inserting a $\gamma^0$ matrix, the true mass term transforms as $\overline \psi \psi \rightarrow \psi^\dagger \Lambda^\dagger \gamma^0 \Lambda \psi$. We'll show that $\Lambda^\dagger \gamma^0 \Lambda = \mathds{1}$ with (\ref{eqn:gamma-sigma-commutator}). Writing out an infinitesimal Lorentz transformation,
 \begin{e}
-  \Lambda \psi = \parens{\mathds{1} + \epsilon B_z}\psi.
+  \overline \psi \psi \rightarrow \overline \psi \psi + i\theta_{\mu\nu}\psi^\dagger \parens{\Sigma^{\mu\nu}\gamma^0 - \gamma^0(\Sigma^{\mu\nu})^\dagger}\psi
 \end{e}
-Suppose that the initial state $\psi$ is just a $\psi_R$ particle in the down state. $\psi = (0,0,0,1)^\dagger$. Then the boosted spinor is
+The goal is to show that 
 \begin{e}
-  \Lambda \psi = (\epsilon,0,0,1).
+  \Delta^{\mu\nu} = i\psi^\dagger \parens{\Sigma^{\mu\nu}\gamma^0 - \gamma^0(\Sigma^{\mu\nu})^\dagger}\psi
 \end{e}
-It appears that the left-handed spinor $\psi_L$ has gained a small component in the up state due to this boost. A stronger boost will increase the $\psi_L$ component and decrease the $\psi_R$ component.
-\jtd{Math is wrong, and I might be using inconsistent reps.}
+is zero.
 
-This is an indication that $\psi_R$ and $\psi_L$ reflect how much a particle's spin is aligned with its velocity. As we boost and reduce the velocity of the particle, the alignment equalizes. If we boosted too much, the alignment would reverse. This alignment, more technically defined as the projection of a particle's spin onto its momentum, is called \emphi{helicity} and is conserved. Thus, a $\psi_L$ with left-handed helicity will remain left-handed until interacted with. This is why we may insert it into the spinor.
+If $\mu$ and $\nu$ are both spacelike, then $(\Sigma^{\mu\nu})^\dagger = \Sigma^{\mu\nu}$ and the term in parentheses is just the commutator given in (\ref{eqn:gamma-sigma-commutator}). $J^{\mu\nu}$ for spacelike indices are the rotation generators and never have timelike components, so that $\Delta^{\mu\nu} = 0$. If one is spacelike and the other is timelike, then $(\Sigma^{\mu\nu})^\dagger = -\Sigma^{\mu\nu}$ for boosts, but (\ref{eqn:gamma-sigma-commutator}) implies that $\Sigma^{\mu\nu}$ and $\gamma^0$ anticommute, so again $\Delta^{\mu\nu} = 0$. Thus, $\overline \psi \psi = 0$.
 
-\jtd{Rewrite this section to actually perform this boost and show the spinor components as a function of velocity}.
+\section{Spin-Statistics Theorem: Fermions Anticommute}
+In most quantum mechanics courses, one of two definitions is given for a fermion. The first is the definition given in the last section --- that fermions are particles with half-integer spin. The second is that fermions obey the Pauli exclusion principle, meaning that no more than one can occupy a single quantum state.
 
+Why these two definitions are equivalent is a mystery until the presence of relativity and CPT symmetry, in which case Pauli exclusion and half-integer spins are tied together in the \emphi{spin-statistics theorem}. In this section, we prove the spin-statistics theorem using a method due to Julian Schwinger. This gives us insight not only into the deep nature of Fermions, but also how to think of the Pauli exclusion principle for a free particle. We will use this insight to clarify the path integral definition in the case of fermions before deriving the fermionic Feynman rules in the next section.
 
+The proof of the spin statistics theorem is as follows. Half-integer spin particles transform via SU(2) under a rotation whereas whole-integer spins transform via SO(3) as discussed in section \ref{sec:non-rel-spin}. A key difference between these two groups is that SU(2) is ``twice as big,'' meaning that a rotation in SO(3) is contained twice in SU(2). This is essentially because a rotation $R$ in SO(3) can be represented with real matrices, whereas the same rotation $R$ in SU(2) is represented with complex matrices. The complex conjugate of the complex matrices is another member of SU(2) but is the same rotation, so that $R$ is contained twice.\jtd{Is this true?}
 
-\section{Spin Statistics Theorem: Fermions Anticommute}
-So far, we have discussed the structure of a spinor $\hat \psi$, which is used to define $n$PCFs. However, the other side of the QFT principle of least action requires us to integrate over numbers $\psi$, not operators. We will end this chapter by discussing how to define the number $\psi$, but first we'll start with a crucial result of QFT: the spin-statistics theorem.
+A consequence of this fact is that if we apply a full SO(3) rotation to spacetime, the spin (transforming under the same rotation via \ref{eqn:rotation-generation}) completes only a half-turn. We would need another full turn to cover the entire SU(2) spin group.
 
-Suppose 
-
-\jtd{Spin statistics}
-
-\jtd{Grassman variables.}
+Suppose we have two spinors which are on opposite sides of the origin --- $\hat \psi(x) R\hat \psi^\dagger(-x)$ --- where one is rotated by a half-turn $R$. Another rotation by $R$ switches their location while also rotating the spinors: $R\hat \psi(-x) R^2\hat \psi^\dagger(x)-R\hat \psi(-x) \hat \psi^\dagger(x)$. CPT inverting this expression gives $-R\hat \psi^\dagger(-x) \hat \psi(x)$. Since QFT is CPT and rotation invariant, the first and the last expressions are equal:
+\begin{e}
+  \hat \psi(x) R\hat \psi^\dagger(-x) = -R\hat \psi^\dagger(-x) \hat \psi(x).
+\end{e}
+Due to translation invariance, we could have placed these spinors at any pair of points $x$ and $y$. It therefore follows that $\hat \psi(x)\hat\psi(y) + \hat \psi(y)\hat\psi(x) = 0$, or
+\begin{e}
+  \braces{\hat \psi(x), \hat \psi(y)} = 0.
+\end{e}
+In other words, fermions \emph{anti-commute}. This is the opposite of bosons, where $R^2\hat \psi = \psi$ and we have
+\begin{e}
+  \brackets{\hat \phi(x), \hat \phi(y)} = 0
+\end{e}
+so that bosons \emph{commute}. The anticommuting nature of fermions is directly responsible for the Pauli exclusion principle since, for $x=y$, it implies $\phi(x)\phi(x)^2 = 0$. Therefore, the operator that creates two particles at position $x$ sends the vacuum to zero and these particles cannot be created.
 
 \section{Feynman Rules for Fermions}
+Now that we have the Lagrangian of free fermions (\ref{eqn:free-fermion-lagrangian}) , we can solve the path integral to find $n$PCFs. This path integral is
+\begin{ec}
+  \braket{0|\hat\psi(k_1)\cdots \hat \psi(k_n)\hat\psi^\dagger(q_1)\cdots \hat \psi^\dagger(q_m)|0} = \frac{\int \mathcal{D}\overline \psi \mathcal{D}\psi\, \psi(k_1)\dots \psi^*(q_m)e^{iS}}{\int \mathcal{D}\overline \psi \mathcal{D}\psi\, e^{iS}}\\
+  S = \int d^4 x\, \overline \psi (i\slashed \del - m)\psi
+\end{ec}
+where $\psi$ represents a four-component vector of complex numbers\footnote{$\psi$ has four components, but it is not a four-vector. It is a spinor. Four-vectors and spinors transform differently under boosts and should be regarded as separate, as described in section \ref{sec:clifford}}.
+The eagle-eyed may notice that this equation has a deep flaw, which is that the $\hat \psi$ operators anticommute due to the spin-statistics theorem, but the $\psi$ complex numbers in the path integral commute just as normal numbers do, which is inconsistent. This is fixed by defining the $\psi$s in the integrand to be a new type of number --- Grassmann numbers --- which anticommute just like the $\hat \psi$ operators do. The properties of Grassmann numbers are outlined in appendix \ref{app:grassmann}, but the only property we will really need is that Grassmann numbers still follow Wick's theorem.
 
-\section{Yukawa Theory Potential}
+For scalar fields in chapter \ref{chap:spin-zero}, we used Wick's theorem (\ref{eqn:wicks-theorem}) to write an $n$PCF in terms of the Green's function of the Lagrangian, $G(k)$. Since Wick's theorem holds for fermions too, all we need is this Green's function for the fermion Lagrangian.
 
-\section{Pion Model of the Weak Force \& Fermionic Spontaneous Symmetry Breaking}
+Recall that the position-space Green's function $G(z)$ for a differential operator $O_x$ is defined as $O_x G(z) = \delta(z)$. We showed in section \ref{sec:scalar-free-path-integral} that, when $O_x$ is symmetric under translations, the Green's function in momentum space is just given by $O(k)G(k) = 1$, where $O(k)$ is the original differential operator with $\del_\mu$ replaced by $-ik_\mu$. For fermions, the differential operator is $O_x = (i\slashed \del - m)$, so $O(k) = (\slashed k - m)$ and
+\begin{e}
+  G(k) = \frac{i}{\slashed k - m-i\epsilon} = \frac{i(\slashed k + m)}{(\slashed k)^2 - m^2-i\epsilon} = \frac{i(\slashed k + m)}{k^2 - m^2-i\epsilon}
+  \label{eqn:fermion-propagator}
+\end{e}
+\jtd{Why the i?}
+where we used the fact that $(\slashed k)^2 = k_\mu k_\nu \gamma^\mu \gamma^\nu$ and the the Clifford algebra (\ref{eqn:clifford-algebra}) to show that $(\slashed k)^2 = k^2$. The $i\epsilon$ term is inserted to remove the singularity which occurs for $k^2 = m^2$, just as we did for the scalar field case.
 
-\section{Yukawa Theory Electric Dipole Moment}
+Now that we've worked out the fermionic propagator, we can use the same diagram technology as for scalar fields to compute scattering amplitudes for fermions. The only changes come from the fact that the $\hat \psi$ operators anticommute, and from the existence of $\gamma^\mu$ matrices in the propagator. These changes are summarized below and explained in the following paragraphs. Examples are also given in the next section.
+\begin{enumerate}
+  \item The propagators are directed. We should take the non-reversibility of these propagators into account when computing symmetry factors (since fermions are charged)
+  \item The propagators should be multiplied in order when traversing backwards along charge arrows (since $\gamma^\mu$ matrices do not commute)
+  \item If two diagrams are equivalent under odd permutations of the external vertices, they contribute opposite signs\footnote{An odd permutation is a permutation which contains an odd number of swaps.} (since fermions anticommute)
+  \item To sum over all possible spins, take the trace over products of $\gamma^\mu$ matrices (since the trace is rotation-invariant)
+  \item We should trace over all propagators inside a loop and multiply by $-1$ (since fermions anticommute)
+\end{enumerate}
+
+Change one is due to the fact that $\psi=\overline \psi$, which is clear from the fact that $\psi$ is a column vector and $\overline \psi$ is a row vector. They are different quantities and cannot be permuted. This is similar to the case of a complex scalar field, where $\psi$ and $\psi^*$ could not be permuted.
+
+Change two is due to the convention that multiplication is conducted from right to left. We wrote the $n$PCF with the initial states on the left and the final states on the right, so we must also multiply the propagators in this order. This matters because $\gamma^\mu$ matrices do not commute, whereas for the scalar theory the propagator was a complex number and multiplication order did not matter.
+
+Change three is due to the fact that fermions anticommute. External vertices in diagrams represent the $\hat \phi(k_i)$ in $n$PCFs, so permuting external vertices is equivalent to permuting spinors. Odd permutations result in an overall minus sign, so odd and even permutations should possess different signs. The overall sign doesn't matter because the phase of a scattering amplitude is not observable.
+
+Change four deserves some more explaining. A cross section gives the probability to scatter from one state to another, and for fermions, those states include spin. Mathematically, one should include spin by multiplying each external propagator (which is a $4\times 4$ matrix) by a four-component vector indicating the spin state of the external particle. It is common to represent the incoming particle as $u$ and the outgoing particle as $\overline u$ (or $v$ and $\overline v$ for antiparticles). Then the cross-section is $uM\overline u$ where $M$ is the product of the propagators between the particles\footnote{This spin state is usually obtained by first writing $u$ in the particle's rest frame and then boosting it via the transformation laws for spinors discussed in section \ref{sec:clifford}. In the rest frame, the left-handed and right-handed spin states are the same two-component vector, analogous to the non-relativistic, two-component particle spin. After the boost, the left- and right-handed components differ.}. However, most experiments cannot detect spin, so that all possible final $u$ vectors should be \emph{summed} over. They also cannot produce particles of one spin, so that all possible $\overline u$ vectors should be \emph{averaged} over; Since spin vectors are ``complete'' in that they fully cover the four-dimensional unit sphere on which spin states live, the sum of $uM\overline u$ over their values is equal to $\tr (M)$. The average is $\tr (M) / 4$ since there are four independent spin states.
+
+The trace in the fifth change follows from the fourth change; a loop in a diagram represents the spontaneous creation and annihilation of a fermion, which may have any spin. We should therefore sum over all spins by taking the trace of the propagators of the loop. The minus sign comes from the fact that an implicit commutation of fermions must occur to calculate the loop. The Green's function which we use as a propagator is a 2PCF where the integrand is $\psi \overline \psi e^{iS}$. The order of $\psi$ and $\overline \psi$ comes from the time ordering symbol of the $n$PCFs; the early time operator must come first. But when calculating a larger diagram, we traverse propagators backwards according to change number one. Thus, the integrand is $(\overline \psi_1 \psi_1) (\overline\psi_2\psi_2)\dots(\overline\psi_n\psi_n) e^{iS}$, where the subscript indicates which number propagator the fermions belong to. Wick's theorem requires us to write this integrand as a product of $\psi \overline \psi$s so that we can represent the integrand as a product of propagators, but this requires us to compute the last $\psi_n$ to the front --- $(\psi_n\overline \psi_1) (\psi_1 \overline\psi_2)(\psi_2\dots\overline\psi_n) e^{iS}$ --- which is an odd number of permutations. The loop therefore contains a negative sign.
+
+This gives us all the mathematical machinery needed to compute scattering amplitudes for a fermionic theory. For the rest of the chapter, we will work with a common interaction mechanism between scalars and fermions known as Yukawa coupling, using this machinery to compute the consequences the theory. The next section introduces Yukawa coupling and computes several simple diagrams showing particle decay to practice with the above changes to the Feynman rules.
+
+\section{Yukawa Theory: Decay in the Massive Scalar Limit}
+
+The Yukawa theory consists of a fermion and a real scalar particle together. The Lagrangian for such a theory is simply the sum of the scalar and fermion Lagrangians. We also add an interaction between the two particles, which goes as $\overline \psi \psi \phi$. This kind of coupling is called \emphi{Yukawa coupling}. The full Lagrangian is
+\begin{e}
+  \mathcal{L} = \frac{1}{2}|\del_\mu \phi|^2 - m_\phi \phi^2 + \overline \psi (i\slashed \del - m_\psi)\psi + g \overline \psi \psi \phi
+  \label{eqn:yukawa}
+\end{e}
+The Yukawa coupling is actually the only way we could couple a fermion to a scalar. $\phi \psi$ is disallowed because the spinor $\psi$ is not dotted with anything and the Lagrangian cannot be spinor-valued. On the other hand, $\overline \psi \psi \phi$ already has dimension 4 so any additional particles would make it an irrelevant operator. This is one reason why Yukawa interactions are so studied. Another is that they appear in the Standard Model, as will be discussed later.
+
+We'll represent the scalar $\phi$ particle as a dashed line and the fermion $\psi$ as a solid line. The vertex corresponding to this new interaction is
+\begin{center}
+  \feynmandiagram [horizontal=a to b, scale=0.8] {
+    i1 -- [fermion] b -- [fermion] i2,
+    a -- [scalar] b,
+  };
+\end{center}
+and contributes a factor of $-ig$ to the amplitude.
+
+In this section, we'll assume a massive scalar: $m_\phi \gg m_\psi$. Intuitively, we know that having a massive scalar implies that the decay of one $\phi$ particle to two (or more) $\psi$ particles is energetically possible. The rest of this section studies this decay.
+
+The leading order diagram for $\phi\rightarrow \overline\psi\psi$ decay is just the interaction vertex
+\begin{center}
+  \feynmandiagram [horizontal=a to b, scale=0.8] {
+    i1 [particle=$\overline \psi$] -- [fermion] b -- [fermion] i2 [particle=$\psi$],
+    a [particle=$\phi$] -- [scalar] b,
+  };
+\end{center}
+which has no internal legs, so it merely has a scattering amplitude of $-ig$. The next order diagrams are more interesting:
+\begin{center}
+  \feynmandiagram [horizontal=a to b] {
+    i1 [particle=$\overline \psi$] -- [fermion, momentum=$q_1$] b -- [fermion, momentum'=$p + q_1$] s1 -- [fermion, momentum=$q_2$] i2 [particle=$\psi$],
+    a [particle=$\phi$] -- [scalar, momentum=$p$] b,
+    s1 -- [scalar, momentum'=$q_4 - q_3$] s2,
+    f2 [particle=$\overline \psi$] -- [fermion, momentum=$q_3$] s2 -- [fermion, momentum=$q_4$] f1 [particle=$\psi$],
+  };
+  \feynmandiagram [horizontal=a to b] {
+    i1 [particle=$\overline \psi$] -- [fermion, momentum=$q$] s1 -- [fermion, momentum=$q-k$] b -- [fermion, momentum=$q'-k$] s2 -- [fermion, momentum=$q'$] i2 [particle=$\psi$],
+    a [particle=$\phi$] -- [scalar, momentum'=$p$] b,
+    s1 -- [scalar, momentum'=$k$] s2,
+  };
+\end{center}
+The first represents $\phi \rightarrow \overline \psi \psi \overline \psi \psi$ while the second is another $\phi\rightarrow \overline \psi \psi$ diagram. Both now have internal propagators, so their matrix elements are more complicated. The first diagram is
+\begin{e}
+  -iM_{\phi \rightarrow \overline \psi \psi \overline \psi \psi} = \frac{1}{4}(-ig)^3 \frac{i\tr(\slashed p + \slashed q_1 - m_\psi)}{(p+q_1)^2 - m_\psi^2}\frac{1}{(q_4-q_3)^2 - m_\phi^2}
+\end{e}
+The first fraction is the internal fermion propagator while the second is the internal scalar propagator. The factor of $1/4$ and the trace appear so that $M$ is the spin-averaged cross section. Unfortunately, this diagram evaluates to zero because, as appendix \ref{app:gamma} indicates, the trace of an odd number of $\gamma^\mu$ matrices is zero. Thus, $\phi \rightarrow \overline \psi \psi \overline \psi \psi$ is a higher-order process.
+
+The second diagram is not zero, however. It has three internal legs arranged in a loop, meaning that there is one free momentum to integrate over.
+\begin{es}
+  -iM_{\phi \rightarrow \overline \psi \psi} = -ig + \frac{(-ig)^3}{4} \int \ftve{4}{k} \tr&\brackets{\frac{i(\slashed q' - \slashed k - m_\psi)}{(q' - k)^2 - m_\psi^2}
+  \frac{i(\slashed q - \slashed k - m_\psi)}{(q - k)^2 - m_\psi^2}}\\
+  &\times \frac{1}{k^2-m^2_\phi}.
+\end{es}
+There were two fermion propagators this time, which we computed in backwards order. The trace is another spin average. Using the fact that $\tr(\gamma^\mu \gamma^\nu) = 4\eta^{\mu \nu}$, 
+\begin{e}
+  -iM_{\phi \rightarrow \overline \psi \psi} = -ig - ig^3 \int \ftve{4}{k} \frac{(q' - k)\cdot(q - k) + m_\psi^2}{((q' - k)^2 - m_\psi^2)((q - k)^2 - m_\psi^2)}\frac{1}{k^2-m^2_\phi}.
+\end{e}
+
+\begin{e}
+  M_{\phi \rightarrow \overline \psi \psi} = g + g^3 \int \ftve{4}{k} \frac{(q' - k)\cdot(q - k) + m_\psi^2}{((q' - k)^2 - m_\psi^2)((q - k)^2 - m_\psi^2)}\frac{1}{k^2-m^2_\phi}.
+\end{e}
+Although the integral is complicated, it depends on few variables. Conservation of momentum dictates that $q' + q$ is the initial momentum of the $\phi$ particle, and if we work in the center of mass frame this momentum is $q' + q = (m_\phi, \bm 0)$. Thus, $q = (m_\phi/2, \bm q)$ and $q' = (m_\phi/2, -\bm q)$ where $m_\phi^2 / 4 - (\bm q)^2 = m_\psi^2$. Thus, $M_{\phi \rightarrow \overline \psi \psi}$ depends only on $m_\psi$ and $m_\phi$. 
+
+To leading order in $m_\psi/m_\phi \ll 1$, the cross section is
+\begin{e}
+  M_{\phi\rightarrow \overline \psi \psi}^\mathrm{2D} \approx g + \frac{g^3}{8\pi}\parens{\frac{m_\psi}{m_\phi}}^2\qquad
+  M_{\phi\rightarrow \overline \psi \psi}^\mathrm{3D} \approx g + \frac{g^3}{8\pi}\parens{\frac{m_\psi}{m_\phi}}
+\end{e}
+in two and three spacetime dimensions respectively. These answers can be confirmed numerically, or computed analytically using the tools of chapter \ref{chap:qed}. Using the conversion from scattering amplitude to decay rate given in (\ref{eqn:decay-rate}), we can triumphantly write our first lifetime for a particle:
+\begin{e}
+  \tau_\phi^\mathrm{2D} = \frac{2m_\phi}{g}\parens{1 - \frac{g^2}{8\pi}\frac{m_\psi}{m_\phi}}\qquad
+  \tau_\phi^\mathrm{3D} = \frac{2m_\phi}{g}\parens{1 - \frac{g^2}{8\pi}\parens{\frac{m_\psi}{m_\phi}}^2}
+  \label{eqn:low-dimension-phi-lifetime}
+\end{e}
+\jtd{This has the wrong dimensions}
+Quantum field theory therefore successfully describes particle decay --- the first ever consistent theory of physics to do so.
+
+We have given these answers in unphysically low dimensionality because $M_{\phi \rightarrow \overline \psi \psi}$ diverges as the number of spacetime dimensions approaches four. This divergence also occurred in the case of the scalar particle in chapter \ref{chap:spin-zero}, and in general occurs for a particle which has a dimensionless coupling constant ($\lambda$ for scalar theory; $g$ for Yukawa theory). This was a serious problem historically in developing QFT as mentioned in chapter \ref{chap:intro}, eventually fixed using the techniques we introduce in chapter \ref{chap:qed}. The divergences also have a physical origin which can be understood already as follows:
+
+At the beginning of this section, we justified the Yukawa Lagrangian by stating that any additional interactions are so high in dimension that their cross sections would be proportional to energy (or a positive power of energy). When using two or three spacetime dimensions, even the Yukawa coupling becomes too high in dimensions and we see that $M_{\phi \rightarrow \overline \psi \psi}$ is proportional to $1/m_\phi^{4-d}$, where $d$ is the number of spacetime dimensions. Since $1/m_\phi$ is small, this confirms our intuition that high-dimensionality interactions are irrelevant in this scenario.
+
+But in the four dimensional case, this trend requires that $M_{\phi \rightarrow \overline \psi \psi}$ is proportional to $1/m_\phi^0$ --- that is, it is a pure number depending only on $g$. However, this cannot be true since $m_\phi$ cannot decay if $m_\phi < 2m_\psi$ due to energy conservation\footnote{Even the low-dimensional lifetimes of (\ref{eqn:low-dimension-phi-lifetime}) predict decay for $m_\phi < 2m_\psi$, which is incorrect by this logic. But they were computed to leading order in $m_\phi/m_\psi$, and the higher orders will resolve the conflict by forcing the lifetime to blow up as $m_\phi$ nears $2m_\psi$. This defense mechanism cannot occur in four spacetime dimensions because $m_\phi$ and $m_\psi$ do not appear in the lifetime.}. Its lifetime therefore must depend on $m_\phi$. The divergence of the amplitude is a mathematical indication of this contradiction.
+
+The decay studied in this section occurs in the Standard Model, where the Higgs boson (mass $\SI{125}{\giga \electronvolt}$) takes the role of the scalar particle and the bottom quark (mass $\SI{4}{\giga \electronvolt}$) takes the role of the fermion (though many other decay paths are possible). The decay is so quick that the Higgs has a lifetime of a few times $\SI{e-22}{\second}$, so that it would travel only a few proton widths before decaying if moving at the speed of light, making it difficult to observe.
+
+Since we've already seen these diverging amplitudes in two theories, we will soon describe how to resolve them. Before this, however, we have two more problems to discuss. One is to further explore the properties of fermions in the remainder of this chapter. The other is to describe spin-one particles, such as light, in the next chapter.
+
+
+\section{Yukawa Potential \& the Meson Model of the Strong Nuclear Force}
+In this section, we'll continue using the Yukawa Lagrangian (\ref{eqn:yukawa}) of the previous chapter, but now we'll consider the opposite limit of the mass ratio, where $m_\psi \gg m_\phi$. We will see that in this limit, the bosonic $\phi$ particle acts as a carrier of a long-distance, attractive force between the fermions which constituted the first model of the atomic nucleus. The mechanism of producing long range forces with bosons occurs quite often in the Standard Model; of the five known fundamental bosons, four are force carriers. Electromagnetism is the most famous example of a long-range force carried by the massless photon. The exception is the Higgs boson, which is quite massive and therefore decays before it carries forces, as discussed in the previous section. Light bosons have use even outside QFT; other theories of physics that use field theory techniques sometimes introduce a light boson to carry long-range forces.
+
+The interaction we'll consider is two heavy fermions which interact by passing a boson from one to the other:
+\begin{center}
+  \feynmandiagram [horizontal=a to b, scale=0.8] {
+    i1 -- [fermion,momentum'=$p'$] a -- [fermion,momentum=$p$] i2,
+    a -- [scalar,momentum=$p'-p$] b,
+    i3 -- [fermion,momentum=$q$] b -- [fermion,momentum'=$q'$] i4,
+  };
+  \hspace{1em}$+$
+  \hspace{1em}
+  \feynmandiagram [vertical=a to b, scale=0.8] {
+    i2 -- [anti fermion,rmomentum'=$p$] a -- [anti fermion,rmomentum=$q$] i1,
+    a -- [scalar,momentum=$q-p$] b,
+    i3 -- [anti fermion,rmomentum=$q'$] b -- [anti fermion,rmomentum'=$p'$] i4,
+  };
+\end{center}
+These diagrams' amplitudes are simply
+\begin{e}
+  -iM = \frac{(-ig)^2}{(p'-p)^2-m_\phi^2} + \frac{(-ig)^2}{(q-p)^2-m_\phi^2}
+\end{e}
+In section \ref{sec:spin-zero-scattering}, we studied similar diagrams and made use of Mandelstam variables (\ref{eqn:mandelstam}) to simplify the expression. There we had three diagrams, but conservation of charge forbids one diagram (the $u$-channel), so we just have
+\begin{e}
+  M = -ig^2\parens{\frac{1}{s^2-m_\phi^2} + \frac{1}{t^2-m_\phi^2}}.
+  \label{eqn:relativistic-amplitude-yukawa}
+\end{e}
+
+The physical consequences of this scattering amplitude are not immediately clear, so let us imagine it in the context of an experiment. Suppose that two beams of distinguishable fermions $A$ and $B$ are fired together and the momenta of the final states are measured. A physicist in the 1920s would have analyzed this situation using non-relativistic quantum mechanics, and determined using the Born approximation that 
+\begin{e}
+  M = -2\pi V(\bm p - \bm q)\delta(E_{\bm p} - E_{\bm q})
+  \label{eqn:non-relativistic-amplitude-yukawa}
+\end{e}
+where $V$ is the Fourier transform of the potential between the particles. This equation was derived in \ref{sec:scattering}. \jtd{I need to mention that time goes up in diagrams. Derive this equation} Equating this amplitude to the QFT amplitude above \jtd{Why the $i$?} connects the relativistic notion of a three-particle Yukawa interaction to the non-relativistic (and familiar) notion of a potential.
+
+Since the particles in our experiment are assumed to be distinguishable, the $t$-channel which mixes particle types should be neglected. Thus, equating (\ref{eqn:relativistic-amplitude-yukawa}) and (\ref{non-relativistic-amplitude-yukawa}) gives
+\begin{e}
+  V(\bm k) = -\frac{g^2}{\bm k^2 - m_\phi^2}.
+\end{e}
+This potential can be converted back to position-space using the tools of complex analysis (discussed in chapter \ref{chap:complex-analysis}) to get a spherically symmetric potential:
+\begin{e}
+  V(r) = -\frac{g^2 e^{-m_\phi r}}{4\pi r}.
+\end{e}
+This attractive potential is called the \emphi{Yukawa potential}. It dies of quickly for $r \gg m_\phi$, but for $r \ll m_\phi$ it behaves like the $V(r) \sim 1/r$ Coulomb potential. Indeed, if $m_\phi = 0$, the Yukawa potential becomes the Coulomb potential, though this prediction is difficult to achieve in practice because $\phi$ is unlikely to be massless, as discussed in \ref{sec:scalar-mass}\footnote{The true Coulomb potential comes from a three-point interaction between fermions and a spin-one particle, rather than this Yukawa interaction between fermions and a spin-zero particle.}.
+
+The fact that QFT can produce this long-range potential is at first surprising. A QFT Lagrangian can only include interactions between fields at the same spacetime coordinate, making it difficult for $\psi$ fields at different locations to reliably respond to distant fluctuations. But with the addition of a boson light enough to propagate long distances, we showed that the particles may communicate via the boson. Not only does this interaction reproduce the phenomenon of non-relativistic quantum mechanics; it also forces the interactions to be causal, since the force-carrying boson cannot move faster than the speed of light.
+
+With that said, one could have expected that a correct physical theory should predict long-range forces because electromagnetism is a long-range force. But the Yukawa potential is crucially different from electromagnetism because it does not possess charges. All nucleons attract each other, whereas in electromagnetism particles of the same charge repel. This property is necessary to create a nucleus, which are observed to contain hundreds of particles for millennia without ejecting them. In fact, the Yukawa potential was invented specifically for the purpose of modeling the nucleus by Hideki Yukawa in 1935. He predicted the existence of a hitherto undiscovered scalar boson known as a \emphi{meson} to mediate the nucleon-nucleon force termed the \emphi{strong force}, or strong nuclear force. Soon after his prediction, the muon was discovered and thought to be the meson in question, though it was later determined to be an unrelated particle\footnote{In \textit{The Feynman Lectures}, Richard Feynman refers to the muon as the ``mu meson'' because the fact that the muon does not interact through the strong force.}. Soon afterwards a true meson --- the pion --- was discovered and Yukawa won the Nobel prize in 1949.
+
+Somewhat surprisingly, the discoveries continued and many more mesons were discovered until the list became too large to name. This may be surprising because the Yukawa interaction requires only one meson to exist, but now we understand that the Yukawa interaction is approximate. Protons, neutrons, and mesons are really made up of quarks, and the true Feynman diagram of nucleon-nucleon interactions is as follows 
+
+\jtd{Diagram}
+
+which looks like a Yukawa interaction diagram unless the substructure of the proton, neutron, or meson are revealed. The vast family of mesons exist merely because there are many ways to combine quarks into distinct particles.
+
+The accurate theory of quarks and mesons is called Quantum Chromodynamics, or QCD, and we discuss it in chapter \ref{chap:qcd} after we have developed the mathematics necessary to understand them. That theory was layed out int he 70s \jtd{check}, delayed due to its complexity. We'll therefore focus on the simpler theory of light --- and spin-one particles  in general --- in the next chapter, moving on to the first quantum theory of electromagnetism in the following chapter.
+
+
+
+\begin{problem}[Verification of the Clifford algebra]
+  Show that the Clifford algebra (\ref{eqn:clifford-algebra}) satisfies the Lorentz algebra (\ref{eqn:lorentz-algebra}) under the definition of the $\gamma^\mu$ functions in (\ref{eqn:def-gamma-matrices}).
+\end{problem}
+
+\begin{problem}[Relativistic Stern-Gerlach Experiment]
+
+\end{problem}

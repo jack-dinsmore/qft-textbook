@@ -80,12 +80,13 @@ The lesson to take from this is that the Lorentz-invariant Fourier transform $|\
 \begin{es}
   d\Gamma = &\parens{\frac{1}{2 E_p}}\parens{\prod_j\frac{d^3 q_j}{(2\pi)^3}\frac{1}{2 E_{q_j}}} \int \frac{d^3 p'}{(2\pi)^3} \braket{\bm q|\bm p}\braket{\bm p'|\bm q}\\
   = &\parens{\frac{1}{2 E_p}}\parens{\prod_j\frac{d^3 q_j}{(2\pi)^3}\frac{1}{2 E_{q_j}}} |M_{p\rightarrow q}|^2(2\pi)^4 \delta\parens{p - \sum_j q_j}.
+  \label{eqn:decay-rate}
 \end{es}
 We integrated over $\bm p'$ in the first line because we don't know the initial momentum of an arbitrary particle drawn from the particle beam; we only now the final states as detected.
 
 Similar techniques can be used to find the probability of interaction for multiple to multiple particle scattering; in this case, the probability is called a cross section $\sigma$. The differential cross section $d\sigma$ is very similar to the equation for $d\Gamma$, except that there may be additional coefficients due to the fact that multiple momenta $\bm p_i$ are now unknown. For example, for two incoming particles with velocity $v_1$ and $v_2$, the differential cross section is
 \begin{es}
-  d\sigma = &\frac{1}{|\bm v_1 - \bm v_2|}\parens{\prod_i\frac{d^3 p_i}{(2\pi)^3}\frac{1}{2 E_{\bm p_i}}}\parens{\prod_j\frac{d^3 q_j}{(2\pi)^3}\frac{1}{2 E_{q_j}}}\\
+  d\sigma = &\frac{1}{|\bm v_1 - \bm v_2|}\parens{\prod_i\frac{d^3 p_i}{(2\pi)^3}\frac{1}{2 E_{\bm p_i}}}\parens{\prod_j\frac{d^3 q_j}{(2\pi)^3}\frac{1}{2 E_{\bm q_j}}}\\
   &\times|M_{p\rightarrow q}|^2(2\pi)^4 \delta\parens{\sum_u p_i - \sum_j q_j}.
 \end{es}
 

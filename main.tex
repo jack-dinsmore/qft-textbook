@@ -19,6 +19,7 @@
 \usepackage{etoolbox}
 \usepackage{ifthen}
 \usepackage{siunitx}
+\usepackage{slashed}
 \usepackage[explicit,compact]{titlesec} % For changing the chapter layout
 \usepackage[T1]{fontenc}
 \usepackage{crimson}
@@ -44,6 +45,7 @@
 \newcommand{\expp}[1]{\exp \left[ #1 \right] }
 \newcommand{\eval}[1]{\left. #1 \right| }
 \newcommand{\abs}[1]{\left| #1 \right| }
+\newcommand{\tr}{\operatorname{tr}}
 \newcommand{\ftve}[2]{\frac{d^{#1} #2}{(2\pi)^{#1}}}
 % \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 \renewcommand{\Re}{\operatorname{Re}}
@@ -95,7 +97,7 @@
 \setlength{\headheight}{13.6pt}
 
 \tikzfeynmanset{
-  momentum/arrow style=lightgray,
+  momentum/arrow style=gray,
   with arrow/.style = {
   decoration={
     markings,

@@ -1,9 +1,44 @@
+\chapter{Properties of the $\gamma^\mu$ matrices}
+\label{app:gamma}
+\chapter{Grassmann numbers}
+\label{app:grassmann}
+Above, we stated the fact that spinor operators anticommute. But in the QFT principle of least action, only the left hand side (the $n$PTFs) contain spinors. The right hand side is a path integral over the complex values of the field, which in this case is just a vector of four numbers $\phi_i$ to emulate the four operators in the $\hat \phi$ spinor.
+
+However, the anti-commuting nature of the fermion must be taken into account. To do so, we define a new number line of anticommuting numbers, which are called Grassmann numbers. These will represent the possible fermionic field values in the path integral of the QFT principle of least action.
+
+The definition of these numbers is that, for any two Grassmann numbers $\eta$ and $\theta$,
+\begin{equation}
+  \theta \eta = -\eta \theta.
+\end{equation}
+A special case is that $\theta^2 = \eta^2 = 0$. These numbers may seem like odd, but future investigation will show that their properties are very simple do to their square vanishing in this way. For example, the Taylor series of any function $f(\theta)$ is $\alpha + \beta\theta + \gamma\theta^2 + \dots$ for more Grassmann numbers constants $\alpha,\beta,\gamma$, etc. But since $\theta^2 = 0$, this is just 
+\begin{e}
+  f(\theta) = \alpha +  \beta\theta.
+\end{e}
+All functions are therefore linear.
+
+Integration is likewise simple for Grassmann numbers. We will only need integrals over the entire space of Grassmann numbers --- the equivalent of integrals from $-\infty$ to $\infty$ on the real line --- and therefore the integral of a function $\alpha + \beta \theta$ should depend only on $\alpha$ and $\beta$. Furthermore, substitution of variables implies that $\int d\theta\, f(\theta) = \int d\theta\, f(\theta + \eta)$, so that
+\begin{e}
+  \int d\theta\, \alpha +  \beta\theta = \int d\theta\, \alpha +  \beta(\theta + \eta) = \int d\theta\, (\alpha + \beta \eta) + \beta \theta.
+\end{e}
+The intercept $\alpha$ of the function has been shifted by this substitution of variables, so the integrand can only be proportional to $\beta$. By convention, we set the integrand equal to $\beta$.
+\begin{e}
+  \int d\theta\, \alpha +  \beta\theta = \beta.
+\end{e}
+For multidimensional integrals, we treat the volume element $d\theta$ as another Grassmann number, so that $d\theta\,d\eta = -d\eta \, d\theta$. By convention, we set
+\begin{e}
+  \int d\eta\, d\theta\, \theta \eta = 1 \implies \int d\theta\, d\eta\, \theta \eta = -1.
+\end{e}
+
+The last detail we need is that of complex Grassmann numbers, which are defined just like normal complex numbers: $\psi = \theta + i\eta$. Their complex conjugate is $\psi^* = \theta - i\eta$.
+
+\subsection{Wick's theorem for Grassmann numbers}
+\jtd{Do this}
+
+
 \chapter{Particles of the Standard Model}
 \chapter{Encyclopedia of Quantum Field Theories}
 \chapter{Important Formulas}
 \chapter{Second Quantization}
-\chapter{Properties of the $\gamma^\mu$ matrices}
-\label{app:gamma}
 \chapter{Lattice QCD}
 \chapter{Spin 2 Particles and Gravitons}
 \chapter{Noether's Theorem}

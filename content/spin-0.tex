@@ -42,6 +42,7 @@ Encouragement to pursue (\ref{eqn:scalar-lagrangian}) comes from the fact that, 
 which is the famous Klein-Gordon equation mentioned in the introduction (\ref{eqn:klein-gordon}). It was already known to satisfy the laws of special relativity, and if $m=0$, it reduces to the familiar wave equation. The scalar Lagrangian (\ref{eqn:scalar-lagrangian}) is therefore a largely familiar beast.
 
 \section{Solving the Scalar Path Integral Without Interactions}
+\label{sec:scalar-free-path-integral}
 
 In this section, we will solve for $n$-point correlation functions $\braket{\hat\phi(x_1)\cdots\hat\phi(x_n)}$ using the QFT principle of least action (\ref{eqn:qft-least-action}). We neglect the $\phi^4$ term by setting $\lambda=0$ in this section, but we will restore $\lambda$ in the following section. As such, the result of this section will be correlation functions for a non-interacting scalar theory.
 
@@ -191,7 +192,7 @@ Substituting this property into (\ref{eqn:scalar-greens-partway}) causes the $k$
 This concludes our calculation of the Green's function. The analog of Wick's theorem (\ref{eqn:wick-discrete}) for Green's functions is 
 \begin{e}
   \braket{0|\hat\phi(x_{1})\cdots\hat\phi(x_{2n})|0} = \sum_{\mathrm{pairs}\ (a,b)_i\ \mathrm{of\ indices}}G(x_{a_1}-x_{b_1})\dots G(x_{a_n}-x_{b_n}).
-  \label{eqn:wicks theorem}
+  \label{eqn:wicks-theorem}
 \end{e}
 and $n$PCFs with $n$ odd are zero.
 
@@ -770,6 +771,7 @@ There is also physical intuition for removing by diagrams like (B) that have vac
 Now that we know not to draw diagrams with vacuum sub-diagrams, we can fully compute any $n$PCF in the interacting theory with the Feynman rules. Our first and primary application for this newfound power will be to compute scattering amplitudes, which the next section is devoted to.
 
 \section{Spin Zero Scattering}
+\label{sec:spin-zero-scattering}
 In this section, we'll compute scattering amplitudes for $\phi\phi \rightarrow \phi\phi$ and $\phi \rightarrow \phi\phi\phi$ to get used to $\phi^4$ theory and to practice with the Feynman rules. We'll follow up with a theory of two scalar particles and compute the probability of decay between the two.
 
 Chapter \ref{chap:scattering} informed us that the scattering probability is the square of the $S$ matrix, where the $S$ matrix entry for $m$ particles with momenta $p_i$ scattering to $n$ particles with momenta $-q_i$is given by the $(m+n)$PCF for momenta $p_i$ and $q_i$. We noted however that the $S$ matrix is mostly zero; only when the incoming total momentum equals the outgoing momentum can scattering occur. This appeared in our calculation in the previous section of the 4PCF as well: every diagram in (\ref{eqn:scattering-diagram-a}) and (\ref{eqn:scattering-diagrams-b-c}) was multiplied by $\delta(p_1 + p_2 + q_1 + q_2)$.
@@ -836,6 +838,7 @@ These represent the first non-trivial effect of QFT we have seen. Everything we 
 where we have removed the external propagators in the spirit of truncation. It's common to deal with these diagrams by defining \emphi{Mandelstam variables}, which are a reparametrization for any two-to-two-particle interaction:
 \begin{e}
   s = (p_1 + p_2)^2\qquad t = (p_1 - q_1)^2 \qquad u = (p_1 - q_2)^2.
+  \label{eqn:mandelstam}
 \end{e}
 There are three variables because momentum conservation makes a fourth one obsolete. They have the interpretation that $s$ is the incoming momentum, equivalently the energy in the center of mass frame, and $t$ and $u$ represent the amount of momentum transfer. Calculation will reveal that each diagram is sensitive only to $s$, $t$, or $u$ respectively, so all three diagrams can be added up as follows:
 \begin{e}
@@ -870,11 +873,13 @@ Taking the limit as $s\rightarrow 4$ reveals that $V(s)$ blows up and scattering
 
 In the derivation of this chapter, each propagator in a Feynman diagram represents a Wick contraction, but there is an intuitive picture for Feynman diagrams beyond the mathematical structure of Wick's theorem. We already know an external propagator --- a particle that links to an external vertex --- represents a particle entering the scattering experiment. Why not view \textit{every} propagator as a particle? Then the $\phi^4$ term of the Lagrangian, which corresponds to four propagators meeting at a vertex $x$ in a diagram, really does represent an interaction at $x$. A diagram with a loop, such as those in (\ref{eqn:scalar-second-order-2-2-diagrams}), represent two particles colliding, only for the outgoing particles to collide with each other again. If one collision is rare, then this secondary collision should be rarer than one collision only, which explains why these diagrams are small. On the other hand, if a collision is common, we might expect every particle pair to collide not just once or twice but many times, in which case we would have to draw infinitely many diagrams. It is at this point that QFT is no longer perturbative, and alternative methods to Feynman diagrams must be taken to compute scattering amplitudes.
 
-There is a small problem with this picture, however. The two internal propagators in (\ref{eqn:scalar-second-order-2-2-diagrams}) are not real particles in a key sense: they are not on-shell. This can be seen in (\ref{eqn:scalar-second-order-2-2-diagrams-values}): we integrate $k$ over all four-dimensional space without requiring $k^2=m^2$. Instead, we call these internal propagators \emphi{virtual particles}, which interact like normal particles but need not have all the physical characteristics of a true particle.
+There is a small problem with this picture, however. The two internal propagators in (\ref{eqn:scalar-second-order-2-2-diagrams}) are not real particles in a key sense: they are not on-shell. This can be seen in (\ref{eqn:scalar-second-order-2-2-diagrams-values}): we integrate $k$ over all four-dimensional space without requiring $k^2=m^2$. Instead, we call these internal propagators \emphi{virtual particles}, which interact like normal particles except that they can be off-shell (meaning that $k^2$ needn't equal $m^2$) and are never observed.
 
 These virtual particles could have been predicted even before we saw the QFT principle of least action. One of the major results of special relativity was that mass is a form of energy, and a result of quantum mechanics is that a quantum particle may tunnel through a high-energy barrier in order to reach a low energy final state. Any theory of quantum mechanics and relativity, such as QFT, should combine these two well-understood phenomena. What better way to combine them than to allow particles to ``tunnel'' into an unphysical, perhaps higher-energy state before reaching a final state? The loop propagators represent this higher-energy state, and are unphysical in the same way that the electron should not classically exist in a high-energy barrier in quantum mechanics. Nevertheless, a particle can pass through the high-energy state in order to attain a different final state.
 
-Since we needed to invoke quantum mechanics to interpret the loop diagrams of (\ref{eqn:scalar-second-order-2-2-diagrams}), we'll often treat any diagram with a loop as a ``quantum correction,'' meaning a small correction quantum mechanics imposes on a classical theory. Figure \ref{fig:2-2-scalar-v-3d} for the second-order $\phi\phi \rightarrow \phi\phi$ amplitude was our first example of a quantum corrections, but more will appear such as mass, energy, magnetic and electric dipole moment corrections.
+We could even have predicted that virtual particles can be off-shell by another example of hybrid quantum mechanical and relativistic reasoning: the energy-time uncertainty principle predicts that quantum states with a short lifetime have uncertain energies. In a relativistic context, the equivalent statement is that particles with a short lifetime have uncertain mass. Virtual particles are never observed, so they have effectively zero lifetime and infinitely uncertain mass, preventing the enforcement of the on-shell constraint.
+
+We'll often treat any diagram with a loop, such as those of (\ref{eqn:scalar-second-order-2-2-diagrams}), as a ``quantum correction'' --- a small correction quantum mechanics imposes on a classical theory. The loop brings all the quantum effects mentioned in the previous paragraphs into the picture; it is comprised of virtual particles and the $\int d^4 k$ represents the fact that these virtual particles are off-shell. Figure \ref{fig:2-2-scalar-v-3d} for the second-order $\phi\phi \rightarrow \phi\phi$ amplitude was our first example of a quantum corrections, but more will appear such as mass, energy, magnetic and electric dipole moment corrections.
 
 The diagrams without loops, often called \emphi{tree-level diagrams}, generally represent the properties of a classical theory that could be attained by merely minimizing the action via the Euler-Lagrange equations. For example, a tree-level diagram delivered us $M_{\phi\phi\rightarrow \phi\phi} = \lambda$ as classical thinking would suggest.
 
