@@ -1,9 +1,112 @@
 \chapter{Spin One}
 \label{chap:spin-one}
 
+In the last chapter, we saw that a massless scalar boson can carry a long-range force between two fermions with a potential of $V(r) \propto 1/r$. This is similar to the electric potential, but a magnetic field is missing. In order to achieve a theory for the magnetic field, we propose a new type of particle named a vector boson which consists of a vector field $A^\mu(x)$, on analogy with the four-vector of electromagnetism. This particle can be called ``spin one'' because it transforms as a vector under Lorentz boosts and rotations, and the only SU(2) or SO(3) representation that rotates like a four vector is the spin-one representation. Our only problem is that the Lagrangian for this field is so high in dimension that $A^\mu$ should not be observable.
+
+We address this dimensionality problem by imposing a gauge symmetry on $A^\mu$ which forbids the offending terms from the Lagrangian. Gauge symmetry is an intrinsic property even of classical electromagnetism, so it is no surprise that it should reappear in QFT. After writing down the possible Lagrangians of $A^\mu$ and how it could couple to a fermion while obeying gauge symmetry, we use the combined vector-fermion theory to predict the potential between fermions, reproducing electromagnetism exactly. Furthermore, the theory predicts that the fermion should have a magnetic dipole moment of about 2, which is true of the electron. Finally, we show that a massless vector particle does not suffer from the same problems as a scalar particle; its masslessness is not ruined by including higher order Feynman diagrams. We're therefore safe to propose that this massless vector particle is the photon, the fermion is the electron, and the theory is a valid theory of Quantum Electrodynamics, or QED.
+
 \section{Gauge Invariance}
 
-\section{The Spin One Lagrangian}
+For a field $A^\mu$, the simplest kinetic term one can put in the Lagrangian is $\del_\mu A^\mu$, and the simplest potential term is $A^\mu A_\mu$. As with the scalar and fermion fields, we normalize the Lagrangian by giving the kinetic term a coefficient of one while all other terms get their own constant: 
+\begin{e}
+  \mathcal{L} = \del_\mu A^\mu - m A^{\mu} A_\mu.
+\end{e}
+where $m$ is the particle mass. The first term requires that $A^\mu$ have dimension 3, so that $m$ has dimension $-2$. Therefore, any dynamics involving this second term are not observable at low energies.
+
+This is a serious problem for any physical model with a vector boson, and seemingly the only solution is to replace the kinetic term $\del_\mu A^\mu$ with a different term, so that the dimensionality of $A^\mu$ could change. But why should $\del_\mu A^\mu$ not exist in the Lagrangian when for the scalar and fermion particles every simple term that could exist in the Lagrangian did so?
+
+We may take inspiration from the classical definition of the vector potential, which is that $A^0$ is the electric potential and $A^i$ or $\bm A$ is the vector potential, meaning the electric and magnetic fields are $\bm E = -\nabla A^0 - \del_t \bm A$ and $\bm B = \nabla \times \bm A$. These $\bm E$ and $\bm B$ fields are observable, while $\bm A$ is not.
+
+Suppose we make the following change to $A^\mu$
+\begin{e}
+  A^0(x) \rightarrow A^0(x) - \del_t \lambda(x) \qquad \bm A(x) \rightarrow \bm A(x) + \nabla \lambda(x)
+  \label{eqn:gauge-symmetry-photon}
+\end{e}
+where $\lambda(x)$ is an arbitrary function. In spacetime notation, this is $A^\mu(x) \rightarrow A^\mu(x) + \del^\mu \lambda(x)$. Since derivatives commute and the curl of a gradient is zero, the fields $\bm E$ and $\bm B$ are unchanged; that is, there is no physical change to the system. We might say that the above transformation is a ``symmetry'' of the system.
+
+The symmetries we have discussed so far are \index{\emph{global symmetry}}{global symmetries}, meaning that they refer to actions taken on the entire field at once. For example, CPT symmetry is a global symmetry because it states that physics is invariant if one flips the charge, parity, and time of everything in the universe, not just the particles in a single region. (\ref{eqn:gauge-symmetry-photon}) is different because the field $\lambda(x)$ can be different at every position; it may even be zero everywhere except in a small region. We call these local symmetries \emph{\index{gauge symmetry}{gauge symmetries}}.
+
+We've referred to symmetries such as the SU(2) symmetry of spin by their group before. The group for the gauge symmetry of electromagnetism must have only one generator because $\lambda(x)$ was the sole generator of (\ref{eqn:gauge-symmetry-photon}). The only such group is U(1), where the U stands for ``Unitary.'' This group is usually represented as  rotating fields by a phase $e^{i\alpha}$, where $\alpha$ is the Euler angle and the generator is one. In (\ref{eqn:gauge-symmetry-photon}) the representation is more complicated than a phase, but the single generator guarantees that the symmetry group is still U(1).
+
+Enforcing this gauge symmetry of classical electromagnetism as a symmetry of the new quantum field $A^\mu$ will destroy the $\del_\mu A^\mu$ kinetic term. If we perform the transformation of (\ref{eqn:gauge-symmetry-photon}) on $\del_\mu A^\mu$, we get
+\begin{e}
+  \del_\mu A^\mu \rightarrow \del_\mu A^\mu + \del_\mu\del^\mu\lambda(x)
+\end{e}
+which is not equal to $\del_\mu A^\mu$. The term is therefore not gauge invariant and cannot be included.
+
+A useful tool for writing gauge invariant equations is to define the \emphi{Faraday tensor}, which is an antisymmetric tensor of fields defined as
+\begin{e}
+  F^{\mu \nu} = \del^\mu A^\nu - \del^\nu A^\mu
+  \label{eqn:faraday-tensor}
+\end{e}
+which is invariant under Gauge transformations. This allows for a gauge invariant kinetic term $F^{\mu\nu}F_{\mu\nu}$. However, no potential term is possible because $A^\mu A_\mu$ is not gauge invaraint. Thus, our new Lagrangian for a vector boson is
+\begin{e}
+  \mathcal{L} = -\frac{1}{4}F^{\mu\nu}F_{\mu\nu}
+\end{e}
+where the $\frac{1}{4}$ factor is a matter of convention. This particle is required to be massless since there is no second term, but in the next section we will show that the addition of an fermion admits another, low-dimensional term, proving that the dynamics of $A^\mu$ are observable.
+
+
+\section{The Fermion-Vector Boson Lagrangian}
+Now that we have understood the importance of respecting Gauge freedom, we can more thoroughly explore the possible Lagrangians of a photon field. The above Lagrangian contains the only two low-dimension terms for a vector particle by itself, but if we include a fermion, things get more complicated. Any term must be invariant under a spin rotation, so it should contain $\gamma^\mu$ and contract $\psi$ with $\overline \psi$. It should also be Lorentz invariant, so all indices should be contracted. The only low-dimension term satisfying both constraints is
+$$ie \overline\psi \gamma_\mu A^\mu\psi  = e\overline \psi \slashed{A}\psi $$
+where $e$ is a constant with dimension $\frac{1}{2}$. The last thing to check is whether this term is invariant under the new gauge U(1) symmetry, but we cannot do this until we determine how $\psi$ transforms under the gauge symmetry.
+
+In the previous two chapters on fermions and scalars, we required that the Lagrangian be invariant under $\psi \rightarrow e^{i\alpha}\psi$, where $\alpha$ is a constant. This is a global U(1) symmetry, global because $\alpha$ does not depend on position. We also associated this phase with charge, because doing so allowed us to use the CPT theorem to justify that $\psi$ and $\overline \psi$ (or $\phi$ ad $\phi^*$ for complex scalars) are antiparticles. Since we're pursuing a quantum version of electromagnetism, it is very tempting to connect these U(1) global and U(1) gauge symmetries.
+
+Let's promote the U(1) global symmetry of the fermion $\psi$ to a U(1) gauge symmetry. That is, we require that the action be invariant under
+\begin{e}
+  \psi \rightarrow e^{ie\lambda(x)}\psi
+\end{e}
+where $\lambda(x)$ is the same $\lambda(x)$ as in (\ref{eqn:gauge-symmetry-photon}). We can then explicitly compute how $e\overline \psi \slashed A \psi$ transforms under gauge transformations:
+\begin{es}
+  e\gamma_\mu\overline \psi A^\mu \psi \rightarrow\ 
+  & e\gamma_\mu \overline \psi\brackets{e^{-ie\lambda(x)}\parens{A^\mu + \del^\mu \lambda(x)}e^{ie\lambda(x)}}\psi\\
+  =\ & e\gamma_\mu\overline \psi A^\mu \psi + e\gamma_\mu \overline \psi \psi \del^\mu \lambda(x)\\
+\end{es}
+which is not gauge invariant. But this promoting the global U(1) to a gauge U(1) also rendered the fermion part of the Lagrangian non-invariant, so we must check how that transforms too:
+\begin{es}
+  \overline \psi \parens{i\slashed \del - m} \psi \rightarrow\ 
+  & i\gamma_\mu \parens{\overline \psi e^{-ie\lambda(x)}} \del^\mu \parens{e^{ie\lambda(x)} \psi} - m \overline \psi e^{-ie\lambda(x)} e^{ie\lambda(x)} \psi\\
+  =\ & i\overline \psi \slashed\del \psi + ie\gamma_\mu \overline \psi \parens{i\del^\mu \lambda(x)} \psi - m \overline \psi\psi \\
+  =\ & \overline \psi \parens{i\slashed\del - m} \psi - e\gamma_\mu \overline \psi \psi \del^\mu \lambda(x).
+\end{es}
+This term is also not gauge invariant, but adding it with the previous term causes the extra contribution from the gauge transformations to cancel, so that the sum (and therefore the total action) is gauge invariant.
+
+To reprise, the full Lagrangian for a vector boson plus an electron is
+\begin{e}
+  \mathcal{L} = -\frac{1}{4}F^{\mu \nu}F_{\mu \nu} + \overline \psi\parens{i \slashed \del - m}\psi + e\overline \psi \slashed A \psi.
+\end{e}
+though it is sometimes written as
+\begin{e}
+  \mathcal{L} = -\frac{1}{4}F^{\mu \nu}F_{\mu \nu} + \overline \psi\parens{i \slashed D - m}\psi
+\end{e}
+where $D_\mu = \del_\mu - i e A_\mu$ is known as the \emph{covariant derivative}.
+
+
+\section{Fermions, Gauge Bosons, and Noether's Theorem}
+In this chapter we started with a vector boson and introduced coupling with a fermion in order to make the vector boson observable. But it is also possible to perform the same task backwards: one can start with any fermion, promote any global symmetry to a gauge symmetry, and create a vector boson known as a \emphi{gauge boson}. We'll review that process in this section.
+
+When we ``gauged'' the U(1) symmetry of the fermion by promoting its $e^{i\alpha}$ global symmetry of $\psi$ to an $e^{i\lambda(x)}$ gauge symmetry, we made the kinetic term of the fermion no longer gauge invariant. This was because the kinetic term involves a derivative $i\overline \psi \slashed \del \psi$ which acted on the $\lambda(x)$ in the gauge transformation and did not act on the constant $e^{i\alpha}$ global transformation. The same derivative will act on any gauge symmetry, even one which isn't U(1).
+
+In the above section, the gauged symmetry required modifying this offending derivative to a covariant derivative $D_\mu$ which contains a contribution from the new gauge boson. After adding a kinetic term for the gauge boson, the action was gauge invariant.
+
+The form of $D_\mu$ derives directly from the symmetry being gauged. For U(1) we subtracted a new term $ieA_\mu$ but for a general symmetry with $n$ generators $\tau_1,\dots, \tau_n$, we will have to create $n$ new vector bosons and add define the covariant derivative as 
+\begin{e}
+  D_\mu = \del_\mu - ie\tau_1 A^1_\mu - \dots - ie\tau_n A^n_\mu.
+\end{e}
+
+Physically, the gauging of this symmetry creates a long-range force between fermions. If the phase of fermions were a global symmetry, then positrons and electrons would be identical except in their parity and time properties and would never interact. But electromagnetism arose when we gauged that symmetry. Every vector boson in the standard model is a consequence of a different symmetry being gauged, and all result in forces between fermions. 
+
+The tool of gauging a global symmetry is an excellent tool for simplifying the standard model. One needn't explain why vector bosons are there if a gauge symmetry \textit{requires} them to be there. It was also a crucial historical development, since seemingly bizarre interactions such as the weak force could be explained by proposing a global symmetry and gauging it. Later in this book, we will explain weak interactions by gauging isospin symmetry, and strong interactions by gauging color symmetry.
+
+This connection between interactions and gauge symmetries was first proposed in 1915, well before the invention of QFT, by Emmy Noether. A mathematician by training and profession, Noether published her incredibly influential Noether's Theorem during a brief six-month break from math, though she was prevented from publishing the result for several years due to institutional sexism against her and her work. The theorem states that any physical theory a gauge symmetry contains a corresponding conserved charge (a charge for which she gives a formula). Our above statement connecting gauge symmetries to vector bosons is same statement in a QFT context, since vector bosons conserve charge.
+
+
+
+
+
+
+
 
 \section{The Ward Identity}
 
