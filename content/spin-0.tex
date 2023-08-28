@@ -1125,7 +1125,7 @@ Another motivation for us to pursue more particles to describe electromagnetism 
 
 \section{Massless Scalars are Rare}
 \label{sec:scalar-mass}
-One final problem with the Coulomb-like potential derived in the previous section is that massless scalars are unlikely to occur. To see why, recall from chapter \ref{chap:spectrum} that the 2PCF of a particle contains a pole at the particle's mass. We can compute the 2PCF of the $\chi$ particle using the Lagrangian above to see where its pole is. The relevant Feynman diagrams are 
+One final problem with the Coulomb-like potential derived in the previous section is that massless scalars are unlikely to occur. To see why, recall from chapter \ref{chap:spectrum} that the 2PCF of a particle contains a pole at the particle's mass. We can compute the 2PCF of the $\chi$ particle using the Lagrangian above to see where its pole is. The first two orders of Feynman diagrams are 
 \begin{center}
   \feynmandiagram [horizontal=b to a] {
     b -- [scalar, momentum'=$p$] a
@@ -1140,11 +1140,35 @@ One final problem with the Coulomb-like potential derived in the previous sectio
 \end{center}
 which correspond to a 2PCF of
 \begin{e}
-  \int d(\mu^2)\, \rho(\mu^2) \frac{1}{p^2-\mu^2} =  \frac{1}{p^2} + \frac{(-ig)^2}{p^4}\int \ftve{4}{k}\frac{1}{k^2 - m_\phi^2}\frac{1}{(p-k)^2 - m_\phi^2}
+  \int d(\mu^2)\, \rho(\mu^2) \frac{1}{p^2-\mu^2} =  \frac{1}{p^2}\brackets{1 + \frac{\Sigma}{p^2}}.
 \end{e}
-where we used the definition of $\rho$ from (\ref{eqn:spectral-density}). We also included the external legs because we're not doing a scattering experiment; we're computing the 2PCF directly.
+where we used the definition of $\rho$ from (\ref{eqn:spectral-density}), and
+\begin{e}
+  \Sigma = (-ig)^2\int \ftve{4}{k}\frac{1}{k^2 - m_\phi^2}\frac{1}{(p-k)^2 - m_\phi^2}.
+\end{e}
+Note that the external legs are included because we are computing a 2PCF, not a scattering amplitude.
 
-The first term clearly has a pole at $\mu^2 = 0$, so at first it looks as though the spike of $\rho$ for the $\chi$ particle is zero as expected. But the integrand of the second contains an even stronger pole when both denominators are zero; i.e., $k^2 = p^2$ and $2 k \cdot p = p^2$. This pole could in principle overwhelm the $p=0$ pole and pull the Dirac spike of $\rho$ off zero. Without more mathematical detail, we will not be able to see exactly whether this happens, but it will be proved in chapter \ref{chap:renormalization} that the spike of $\rho$ is moved.
+We could have continued adding loops, leading to diagrams such as 
+\begin{center}
+  \feynmandiagram [layered layout, horizontal=b to c, scale=0.8] {
+    a -- [scalar] b
+    -- [fermion, half left, looseness=1.5] c
+    -- [fermion, half left, looseness=1.5] b,
+    c -- [scalar] d
+    -- [fermion, half left, looseness=1.5] e
+    -- [fermion, half left, looseness=1.5] d,
+    e -- [scalar] f
+    -- [fermion, half left, looseness=1.5] g
+    -- [fermion, half left, looseness=1.5] f,
+    g -- [scalar] h,
+  };
+  $\cdots$
+\end{center}
+Adding together all the contributions from all numbers of loops gives
+\begin{es}
+  \int d(\mu^2)\, \rho(\mu^2) \frac{1}{p^2-\mu^2} &=  \frac{1}{p^2}\brackets{1 + \frac{\Sigma}{p^2} + \frac{\Sigma^2}{p^4} + \cdots}\\ = \frac{1}{p^2}\frac{1}{1 - \Sigma/p^2} &= \frac{1}{p^2 - \Sigma}.
+\end{es}
+Surprisingly, the loops move the spike in the spectral density $\rho(\mu^2)$ from zero to $\mu^2 = \Sigma$, in violation of our expectation that the mass of the $\chi$ particle should be $m_\chi$, which is zero\footnote{We have implicitly assumed that $\Sigma \neq 0$. This assumption is correct, but we will not have the mathematical tools to evaluate $\Sigma$ until chapter \ref{chap:renormalization}.}.
 
 This fact leaves an interesting question. If the spike in the spectral density $\rho$ need not equal the particle mass in the Lagrangian, which should we interpret as mass? It is tempting to continue to quote the $m_\chi$ in the Lagrangian as the mass of the particle because it is an intuitive quantity, but this number is not actually observable while the spike in the spectral density is. As we mentioned earlier in this chapter, the spike also plays the key role of ensuring that any particle's momentum always obeys the relativistic $p^2 = m^2$ constraint. The square of the 2PCF gives the probability of a state being observed, so if the 2PCF blows up for $p^2$ equal to a certain amount it makes sense to define that amount as the mass.
 
