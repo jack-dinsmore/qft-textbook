@@ -883,15 +883,6 @@ We'll often treat any diagram with a loop, such as those of (\ref{eqn:scalar-sec
 
 The diagrams without loops, often called \emphi{tree-level diagrams}, generally represent the properties of a classical theory that could be attained by merely minimizing the action via the Euler-Lagrange equations. For example, a tree-level diagram delivered us $M_{\phi\phi\rightarrow \phi\phi} = \lambda$ as classical thinking would suggest.
 
-Thinking of internal propagators as particles will be useful in the next section, where we discuss the ability of light scalars to carry long-range forces between other scalars.
-
-\section{Coulomb Potential for Scalars}
-
-\jtd{Some Born approx shit}
-\begin{e}
-  \mathcal{L} = -\frac{1}{2}(\del_\mu \phi)^2 - \frac{1}{2}m\phi^2 - \frac{1}{2}(\del_\mu \chi)^2 - g \phi^2 \chi
-\end{e}
-
 
 \section{Complex Scalar Theory}
 So far, we've considered only real scalar fields where $\phi^* = \phi$, but one may well ask if complex scalar fields exist. After all, the fermions in Nature can all take on complex values, and the only fundamental scalar particle in Nature (the Higgs) is complex. Fortunately for us, generalizing the above results to a complex field will be mathematically easy. However, it will bring up a critical new physics concept which we will need to understand: the antiparticle.
@@ -1045,9 +1036,126 @@ Thus, a difference between complex scalar scattering and real scalar scattering 
 One of the most famous properties of matter and antimatter is that they explode on contact with each other. Electrons and positrons annihilate to two or three photons, as do neutral pions. Charged pions decay to muons and neutrinos, et cetera. In the next section,  we'll introduce a real scalar field as a photon-like particle and compute amplitudes for a complex scalar field to decay in this theory.
 
 \section{Scalar Decay}
+Let's create a theory with two particles: a complex scalar $\phi$ and a real scalar $\chi$ and an interaction between them of $\phi \phi^* \chi$. This corresponds to a Lagrangian of
+\begin{e}
+  \mathcal{L} = -|\del_\mu \phi|^2 - m_\phi|\phi|^2 - \frac{1}{2}(\del_\mu \chi)^2 - \frac{1}{2}m_\chi\chi^2 - g \phi\phi^* \chi.
+\end{e}
+In order to draw Feynman diagrams for a system with two particles, we need two types of lines --- a dashed line for $\chi$ and a solid line for $\phi$. The Feynman rules are as you might guess; the $\phi$ and $\chi$ propagators are still $G(k)$, momentum conservation is still applied at every vertex, and internal propagators are still integrated over. The only difference comes from the new interaction terms, which allows vertices connecting two $\phi$ particles to one $\chi$ particle
+\begin{center}
+  \feynmandiagram [horizontal=b to a, scale=0.8] {
+    i1 -- [fermion] b -- [fermion] i2,
+    a -- [scalar] b,
+  };
+\end{center}
+which contributes an amplitude of $-ig$. Note that there is no charge arrow on the dashed $\chi$ line because $\chi$ is real and therefore uncharged.
 
-\section{Massless Scalars are Unprotected}
+Many interesting phenomena can be studied in this theory, but in this section we will only focus on one: the decay of $\chi$ into two $\phi$ particles. Due to energy conservation, this decay can only occur if $m_\chi > 2m_\phi$, so we assume this inequality.
+
+The leading order interaction for decay is just the above Feynman diagram with some added labels
+\begin{center}
+  \feynmandiagram [vertical=b to a, scale=0.8] {
+    i1 -- [fermion, momentum=$q$] b -- [fermion, momentum=$q$] i2,
+    a -- [scalar, momentum=$0$] b,
+  };
+\end{center}
+We've also rotated the diagram because, when drawing diagrams for scattering experiments, it is traditional to put the initial state at the bottom and the final state at the top so that time flows upwards as in embedding diagrams in relativity. We assumed that the $\chi$ particle is at rest, which we can always undo by boosting into a different reference frame if needed. The only truncated next order diagram is
+\begin{center}
+  \feynmandiagram [vertical=b to a, scale=0.8] {
+    i1 -- [fermion] p1 -- [fermion, momentum=$q-k$] b -- [fermion, momentum=$q-k$] p2 -- [fermion] i2,
+    a -- [scalar] b,
+    p1 -- [scalar, momentum'=$k$] p2,
+  };
+\end{center}
+Together, these diagrams produce a decay amplitude of 
+\begin{e}
+  iM = -ig + (-ig)^3\int \ftve{4}{k} \frac{1}{k^2-m_\chi^2}\frac{1}{[(q-k)^2-m_\phi^2]^2}
+\end{e}
+which yields a decay rate given by (\ref{eqn:total-decay-rate}). For the rest of this discussion, we'll neglect the second order term and just use $M=-g$.
+
+Energy conservation gives $2q^0 = m_\chi$ and the on-shell constraint dictates that $(q^0)^2 - \bm q^2 = m_\phi^2$, so the momentum of the outgoing particles is $\bm q^2 = m_\phi^2 - m_\chi^2 / 4$. Thus, the three-dimensional integral over outgoing momenta is actually a two-dimensional integral on a sphere, and the spherical symmetry of this decay problem implies that the value is $4\pi$ times the integrand. Thus,
+\begin{e}
+  \Gamma = \frac{|M_{p\rightarrow q}|^2}{(2\pi)^5 m_\chi^3}\parens{m_\phi^2 - \frac{m_\chi^2}{4}}
+\end{e}
+It's more interesting to compute the unitless constant $\Gamma m_\chi^2$ --- physically, the probability to decay within one Compton wavelength of the particle, as a function of the ratio of $\mu = 2m_\phi / m_\chi < 1$. This is
+\begin{e}
+  m_\chi \Gamma = \frac{1-\mu^2}{4(2\pi)^5}g^2
+\end{e}
+
+One can see that as the decay products get lighter and $\mu$ gets smaller, the lifetime of $\chi$ becomes shorter. This is intuitively what we expect of our first every decay width calculation. Decay is the relativistic version of quantum tunneling into a new state, and quantum tunneling is generally more likely to happen if the potential energy of the end state is lower. Here, the mass energy of the end state is proportional to $\mu$, so we expect the lifetime to decrease with $\mu$. 
+
+Another intuitive fact is that, for $\mu = 0$, $\Gamma$ reaches a finite value. This is something we should have expected because many particles in Nature, such as the pion, decay into massless photons. Yet the neutral pion has a relatively long lifetime of seconds, corresponding to a travel distance of 25 nanometers when moving at the speed of light (many particles live even shorter lives). Ignoring the fact that photons are not complex scalar particles, it would be concerning if our current calculations predicted zero lifetime for such decays.
+
+If $m_\chi < m_\phi$, this decay is energetically forbidden, and completely new physics arises from the same Lagrangian which is discussed in the next section.
+
+\section{Coulomb Potential for Scalars}
+\label{sec:scalar-coulomb}
+One of the foundational assumptions of QFT was that the theory is local, meaning that every particle is influenced only by its immediate environment. This might seem obviously incorrect at first because of long-range forces like Coulomb's law, which allow distant objects to affect one another. But in electromagnetism we explained these forces via a field which propagates information between objects by the means of waves, and in QFT we graduate those waves to particles. In this section we use the same Lagrangian as in the previous to demonstrate a long-range force carrier.
+
+As an experiment to look for forces, we could scatter a complex scalar $\phi$ particle off of an equally charged $\phi$ particle and measure the cross section. The light, real scalar $\chi$ will carry the force between the two particles. The leading order diagram for this interaction is
+\begin{center}
+  \feynmandiagram [horizontal=b to a] {
+    i1 -- [fermion, momentum'=$p_1$] b -- [fermion, momentum'=$q_1$] i2,
+    j1 -- [fermion, momentum=$p_2$] a -- [fermion, momentum=$q_2$] j2,
+    b -- [scalar, momentum=$p_1 - q_1$] a,
+  };
+\end{center}
+If the outgoing particles were distinguishable then there would be a second diagram wherein the particles are swapped, but in this case the outgoing particles are equally charged and are indistinguishable. Setting $m_\chi=0$, the scattering amplitude is
+\begin{e}
+  iM = \frac{-ig^2}{(p_1 - q_1)^2}
+\end{e}
+which is just a constant times the Green's function for the one internal propagator.
+
+We can use this scattering amplitude to compute the equivalent of the potential between the particles if we make a few approximations. Firstly, we'll work in the non-relativistic limit, where the energies of all particles is approximately their masses, in which case $p_1 - q_1$ has zero temporal component. The second approximation is to compare this amplitude with that predicted by non-relativistic quantum mechanics under the Born approximation, as discussed in appendix \ref{app:quantum}. That amplitude is $M(\bm p_1 - \bm q_1) = -V(\bm p_1 - \bm q_1)$ where $V$ is the Fourier transform of the potential between particles. Plugging in our amplitude calculation, we have
+\begin{e}
+  V(\bm x) = -g^2\int \ftve{3}{\bm \ell}\frac{e^{i\bm \ell \cdot \bm x}}{\bm \ell^2}
+\end{e}
+where $\bm \ell = \bm p_1 - \bm p_2$. By inspection, the integral cannot depend on the orientation of $\bm x$, so we write $\bm x = r \hat{\bm z}$ and switch to spherical coordinates:
+\begin{es}
+  V(r) &= -\frac{g^2}{4\pi^2} \int_{-1}^1 d\cos\theta \, \int_0^\infty d\ell \, e^{i\ell r \cos \theta}\\
+  &= -\frac{g^2}{8\pi^2}\int_{-1}^1 d\cos\theta \, \int_{-\infty}^\infty d\ell \, e^{i\ell r \cos \theta}\\
+  &= -\frac{g^2}{4\pi}\int_{-1}^1 d\cos\theta \, \delta(r \cos \theta)\\
+  &= -\frac{g^2}{4\pi r}\\
+\end{es}
+The second line came about by recognizing that the real part of the integrand was symmetric under $\ell \rightarrow -\ell$, so we could extend the $\ell$ integral. The third line applied the theorem connecting the integral of an oscillating exponent to the delta function. The last line came from the fact that $\delta(f(x)) = \delta(x)/f'(x)$.
+
+If we interpret the $g$ as the ``charge'' of the scalar particle, then the result is the Coulomb potential! In case the QFT principle of least action were still in doubt, this is an excellent sign that the theory is pointing us in the right direction. The only strangeness is that the sign is wrong; these like-charged particles are attracted to each other whereas in electromagnetism they would be repelled. This is a result of our choice to use scalar particles. In the next two chapters we will introduce new particles which are capable of flipping this sign to become more electromagnetism-like.
+
+Another motivation for us to pursue more particles to describe electromagnetism is that this theory contains no magnetic field. There aren't enough degrees of freedom in the particles provided to store the direction of an additional field, and adding new ``magnetic field particles'' would not be able to interact so as to guarantee Maxwell's equations. We will need a particle capable of encoding the direction of the magnetic field within its quantum state.
+
+
+\section{Massless Scalars are Rare}
 \label{sec:scalar-mass}
+One final problem with the Coulomb-like potential derived in the previous section is that massless scalars are unlikely to occur. To see why, recall from chapter \ref{chap:spectrum} that the 2PCF of a particle contains a pole at the particle's mass. We can compute the 2PCF of the $\chi$ particle using the Lagrangian above to see where its pole is. The relevant Feynman diagrams are 
+\begin{center}
+  \feynmandiagram [horizontal=b to a] {
+    b -- [scalar, momentum'=$p$] a
+  };
+  \qquad
+  \feynmandiagram [layered layout, horizontal=b to c] {
+    a -- [scalar, momentum=\(p\)] b
+    -- [fermion, half left, looseness=1.5, momentum=\(k\)] c
+    -- [fermion, half left, looseness=1.5, momentum=\(k-p\)] b,
+    c -- [scalar, momentum=\(p\)] d,
+  };
+\end{center}
+which correspond to a 2PCF of
+\begin{e}
+  \int d(\mu^2)\, \rho(\mu^2) \frac{1}{p^2-\mu^2} =  \frac{1}{p^2} + \frac{(-ig)^2}{p^4}\int \ftve{4}{k}\frac{1}{k^2 - m_\phi^2}\frac{1}{(p-k)^2 - m_\phi^2}
+\end{e}
+where we used the definition of $\rho$ from (\ref{eqn:spectral-density}). We also included the external legs because we're not doing a scattering experiment; we're computing the 2PCF directly.
+
+The first term clearly has a pole at $\mu^2 = 0$, so at first it looks as though the spike of $\rho$ for the $\chi$ particle is zero as expected. But the integrand of the second contains an even stronger pole when both denominators are zero; i.e., $k^2 = p^2$ and $2 k \cdot p = p^2$. This pole could in principle overwhelm the $p=0$ pole and pull the Dirac spike of $\rho$ off zero. Without more mathematical detail, we will not be able to see exactly whether this happens, but it will be proved in chapter \ref{chap:renormalization} that the spike of $\rho$ is moved.
+
+This fact leaves an interesting question. If the spike in the spectral density $\rho$ need not equal the particle mass in the Lagrangian, which should we interpret as mass? It is tempting to continue to quote the $m_\chi$ in the Lagrangian as the mass of the particle because it is an intuitive quantity, but this number is not actually observable while the spike in the spectral density is. As we mentioned earlier in this chapter, the spike also plays the key role of ensuring that any particle's momentum always obeys the relativistic $p^2 = m^2$ constraint. The square of the 2PCF gives the probability of a state being observed, so if the 2PCF blows up for $p^2$ equal to a certain amount it makes sense to define that amount as the mass.
+
+This realization --- one might say betrayal --- that the Lagrangian mass is not the true mass of the particle has a physical explanation, which also explains why we only noticed the difference between the Lagrangian mass and the spectral mass (the true mass) when we looked at a loop diagram. When a $\chi$ particle is moving through space, this loop represents the creation of virtual $\phi$-anti$\phi$ pairs that immediately annihilate. This happens at all times at all points in space and is an inevitable prediction of a quantum theory that allows tunneling. We never observe these virtual particles, but their presence temporarily increase the rest energy of the $\chi$ particle and is responsible for the shift in the spike of $\rho(\mu^2)$. Thus, when we observe the $\chi$ particle we also observe the shadow of the $\phi$ particles it is coupled to.
+
+One might be suspicious of this rather hand-wavy argument, but some experiments confirm that this particle-antiparticle creation and annihilation is exactly what is happening. Specifically, when measurements are made in an extremely small volume or extremely close to another particle, these particle-antiparticle pairs have less room to form and are suppressed. The Lagrangian mass being exposed a little, and the observed properties of particles start to change. For example, when an electron is put very close to a proton, the charge of both appears to increase a little and this results in a small shift in the energy of the $s$ orbitals of hydrogen known as the Lamb shift. Another example is that when you put two plates very close to each other, the particle-antiparticle pairs that occur naturally in a vacuum are suppressed between them, and the pressure of these pairs outside the plates forces them together in a phenomenon known as the Casimir effect. The mathematical description for these effects will be given in chapter \ref{chap:renormalization}.
+
+This mass shift is why the title of this section is that massless scalars are rare. In order for $\chi$ to be observed as massless --- that is, the spike of its spectrum is at zero --- its $m_\chi$ value in the Lagrangian must be ``fine tuned'' such that the loop diagram and all higher order loop diagrams cancel exactly with $m_\chi$ and move the spike of the spectrum to zero. Historically, a theory that requires parameters to be finely tuned to reproduce observations has been ill-trusted because it suggests the existence of some unexplained structure to the universe. Fortunately, we do not observe any massless scalars in Nature, so there is no fine tuning problem. The only massless particles are vector bosons, which we will see in chapter \ref{chap:spin-one} cannot be made massive by loop diagrams.
+
+
+
 
 \begin{problem}[Wick's Theorem]
   In section \ref{sec:wicks-theorem}, we explained Wick's theorem, which is that 
@@ -1073,4 +1181,16 @@ One of the most famous properties of matter and antimatter is that they explode 
   Write out the Feynman rules for this theory. What would be the Feynman rules of the Lagrangian
   $$\mathcal{L} = \frac{1}{2}(\del_\mu \phi)^2 - m^2 \phi^2 + \frac{g'}{4}\phi^2(\del_\mu \phi)^2?$$
   Hint: this question requires very little math.
+\end{problem}
+
+\begin{problem}[Coulomb potentials]
+  Using the same Lagrangian as section \ref{sec:scalar-coulomb}, determine whether oppositely charged $\phi$ particles repel or attract.
+\end{problem}
+
+\begin{problem}[Coulomb potentials]
+  Section \ref{sec:scalar-coulomb} showed that scalar particles reproduce Coulomb's force.
+  \begin{enumerate}
+    \item Convince yourself that the reason why Coulomb's force was reproduced was that the diagram we were using evaluated to a single particle propagator, and that the form of this propagator came from the kinetic term in the Lagrangian
+    \item The Coulomb potential is sometimes justified via Gauss's law, that $\nabla^2 V(x) \propto \rho(x)$. Like the Lagrangian, this is a local equation. Argue that it is unsurprising that the Lagrangian kinetic term and Gauss's law should have both led to the same conclusion.
+  \end{enumerate}
 \end{problem}

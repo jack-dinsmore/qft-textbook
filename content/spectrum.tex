@@ -3,23 +3,30 @@
 
 The $n$PCFs were connected to scattering in the previous chapter, but the 2PCF in particular has an intriguing property known as the K\"all\'en-Lehmann spectral representation which we will remark in this chapter. Namely, the 2PCF $\braket{\hat \psi(p)\hat\psi^\dagger(q)}$ summarizes all of the important properties of the particle $\psi$, including its mass, decay rate, bound states, and scattering.
 
-Let's build intuition for $\braket{\hat \psi(p)\hat\psi^\dagger(q)}$ by treating it in a scattering scenario as an $S$-matrix element. It would represent the probability for a particle to scatter from momentum $p$ to momentum $q$, meaning $q=p$ by conservation of momentum. Also, due to Lorentz invariance, $\braket{\hat \psi(p)\hat\psi^\dagger(p)}$ cannot depend on the four-vector $p^\mu$. It can only depend on the Lorentz invariant quantity $p^2$ and constants --- that is, $\braket{\hat \psi(p)\hat\psi^\dagger(p)}$ is a function of one variable $p^2$.
+Let's build intuition for $\braket{0|\hat \psi(p)\hat\psi^\dagger(q)|0}$ by treating it in a scattering scenario as an $S$-matrix element. It would represent the probability for a particle to scatter from momentum $p$ to momentum $q$, meaning $q=p$ by conservation of momentum. The fact that only one particle is involved makes this 2PCF an intrinsic measurement of the properties of a particle. It does not depend on external particles coming close and scattering; it only measures a particle's only self-interactions.
 
-We expect the on-shell constraint to force $p^2=m^2$, meaning that $\braket{\hat \psi(p)\hat\psi^\dagger(p)}$ should blow up at $p^2=m^2$ in order to suppress $p^2\neq m^2$ effects. To show this, we define the \emphi{spectral-density} $\rho(\mu^2)$ such that
+Due to Lorentz invariance, $\braket{\hat \psi(p)\hat\psi^\dagger(p)}$ cannot depend on the four-vector $p^\mu$. It can only depend on the Lorentz invariant quantity $p^2$ and constants --- that is, $\braket{\hat \psi(p)\hat\psi^\dagger(p)}$ is a function of one variable $p^2$. We expect the on-shell constraint to force $p^2=m^2$, meaning that $\braket{\hat \psi(p)\hat\psi^\dagger(p)}$ should blow up at $p^2=m^2$ in order to suppress $p^2\neq m^2$ effects. The simplest way to blow up in this way is
 \begin{e}
-  \braket{\hat \psi(p)\hat\psi^\dagger(p)} = \int d(\mu^2) \rho(\mu^2) \frac{i}{p^2-\mu^2}
+  \braket{\hat \psi(p)\hat\psi^\dagger(p)} = \frac{i}{p^2 - m^2}.
+  \label{eqn:expected-2pcf}
+\end{e}
+To measure deviations from this expected blow-up, we define the \emphi{spectral-density} $\rho(\mu^2)$ such that
+\begin{e}
+  \braket{\hat \psi(p)\hat\psi^\dagger(p)} = \int d(\mu^2) \rho(\mu^2) \frac{i}{p^2-\mu^2}.
   \label{eqn:spectral-density}
 \end{e}
-and the on-shell constraint requires $\rho(\mu^2) = \delta(\mu^2-m^2)$. That is, the spectrum has a Dirac spike at $m^2$.
+The on-shell constraint requires $\rho(\mu^2)$ to be infinite at $\mu=m$, and if $\braket{\hat \psi(p)\hat\psi^\dagger(p)}$ blows up in the simple way we also expect $\rho$ to be zero elsewhere, so $\rho(\mu^2)=\delta(\mu^2-m^2)$.
 
-We have produced this equation only using our interpretation of $\braket{\hat \psi(p)\hat\psi^\dagger(q)}$ as an $S$ matrix element and requiring the on-shell constraint. In the next chapter, we will prove that (\ref{eqn:spectral-density}) is true via the QFT principle of least action in a non-interacting theory.
+We have produced this equation only using our interpretation of $\braket{\hat \psi(p)\hat\psi^\dagger(q)}$ as an $S$ matrix element and requiring the on-shell constraint. It turns out that (\ref{eqn:expected-2pcf}) is exactly true for a theory with no interactions, as we will see in the next chapter. Thus, $\rho(\mu^2)=\delta(\mu^2 - m^2)$ is a prediction of that theory.
 
-In the case of interactions, the story is complicated however. Interactions allow bound states between particles to exist, so that the $\psi$ and $\psi^\dagger$ particles might not need be interpreted as plane wave states but as constituent particles in the bound state. Then the corresponding pole in $\rho$ will be shifted by the binding energy of the bound state. For example, an electron and a positron can exist together in a bound state known as positronium, which has a ground state energy of $E=2m-\SI{6.8}{\electronvolt}$ where $m=\SI{511}{\kilo\electronvolt}$ is the mass of the electron.
+Interactions add extra detail to the spectral density. For example, interactions between the electron and the electric field allow bound states such as hydrogen to exist. In a purely electron theory, electrons and positrons can still combine into a hydrogen-like bound state called positronium, which has energy $E = 2m_e - \delta$, where $\delta=\SI{6.8}{\electronvolt}$ is a small energy shift due to the binding energy of the state. We would expect a small Dirac spike in $\rho(\mu^2)$ representing that this state can occur. Excited states of positronium would also appear with smaller values of $\delta$.
 
-Positronium would place an additional pole in $\rho(p^2)$ at $p^2 = E^2$, except for the fact that positronium decays usually into two gamma rays with a lifetime of $\tau = 0.12$ ns. This decay has the effect of blurring out the pole into a \emphi{Breit-Wigner} distribution 
+As we will discuss, positronium decays usually into two gamma rays with a lifetime of $\tau = 0.12$ ns. The sometimes-discussed energy-time uncertainty principle\footnote{If you haven't heard of the energy-time uncertainty principle, it arises from the same place as the Heisenberg momentum-position uncertainty principle. Momentum and position are intrinsically related because the fact that physics is invariant under translation is what causes momentum to be conserved. Similarly, the fact that physics is invariant under time translation causes energy to be conserved, giving rise to another uncertainty relation for energy and time.} implies that this limited lifetime causes the energy of the positronium ground state to be uncertain. It is difficult to understand this statement precisely in the context of non-relativistic quantum mechanics, but in QFT it manifests as blurring out the Dirac spike in $\rho(\mu^2)$ into a peaked function known as the \emphi{Breit-Wigner distribution}  
 \begin{e}
   \rho(p^2) \propto \frac{1}{(p^2 - E^2)^2 + E^2 \Gamma^2}
 \end{e}
-where $\Gamma = \frac{1}{\tau} = \frac{1}{\SI{0.12}{\nano\second}}$ is the decay width. When the $\psi$ particle itself is unstable, the $p^2=m^2$ pole is similarly broadened. When detecting particles in a collider, this Breit-Wigner distribution is observed and its peak used to define the mass of the particle.
+where $\Gamma = \frac{1}{\tau} = \frac{1}{\SI{0.12}{\nano\second}}$ is the state decay width.
 
-\jtd{scattering}
+Some particles in the standard model are themselves unstable, such as the neutron which has a lifetime of 15 minutes. For these particles all the Dirac spikes are blurred into the Breit-Wigner distribution, including the $p^2=m^2$ pole. When detecting particles in a collider, this Breit-Wigner distribution is observed and its peak is sometimes used to define the mass of very short-lived particles.
+
+\jtd{Scattering and spectrum beyond $2m$}

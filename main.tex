@@ -15,7 +15,6 @@
 \usepackage{makecell}
 \usepackage{dsfont}
 \usepackage{fancyhdr}
-\newcounter{mycounter}
 \usepackage{etoolbox}
 \usepackage{ifthen}
 \usepackage{siunitx}
@@ -25,6 +24,7 @@
 \usepackage{crimson}
 \usepackage[hidelinks]{hyperref}
 
+\newcounter{mycounter}
 \NewEnviron{e}[1][]{\begin{equation}\BODY\end{equation}}
 \NewEnviron{es}[1][]{\begin{equation}\begin{split}\BODY\end{split}\end{equation}}
 \NewEnviron{ec}[1][]{\begin{equation}\begin{gathered}\BODY\end{gathered}\end{equation}} % Centered
@@ -128,6 +128,8 @@
 
 \input{content/why-qft.tex}
 \part{Non-Perturbative Techniques}
+This part is devoted to understanding $n$-point correlation functions, which are the output of QFT predictions. These functions have two major uses: one is to compute scattering cross-sections and decay probabilities (chapter \ref{chap:scattering}) while another is to compute the spectrum of a quantum particle (chapter \ref{chap:spectrum}). In these two chapters we will introduce important tools, but save actual predictions for later parts, where we introduce new Lagrangians and use them to compute the $n$-point correlation functions.
+
 \input{content/scattering.tex}
 \input{content/spectrum.tex}
 \input{content/lattice.tex}
@@ -137,8 +139,8 @@
 \input{content/spin-0.tex}
 \input{content/spin-0.5.tex}
 \input{content/spin-1.tex}
-\input{content/ir-divergences.tex}
 \input{content/uv-divergences.tex}
+\input{content/ir-divergences.tex}
 \input{content/qed-effects.tex}
 
 \part{Electroweak Theory \& the Higgs Mechanism}
