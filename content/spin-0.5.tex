@@ -306,9 +306,22 @@ Recall that the position-space Green's function $G(z)$ for a differential operat
 \jtd{Why the i?}
 where we used the fact that $(\slashed k)^2 = k_\mu k_\nu \gamma^\mu \gamma^\nu$ and the the Clifford algebra (\ref{eqn:clifford-algebra}) to show that $(\slashed k)^2 = k^2$. The $i\epsilon$ term is inserted to remove the singularity which occurs for $k^2 = m^2$, just as we did for the scalar field case.
 
-Now that we've worked out the fermionic propagator, we can use the same diagram technology as for scalar fields to compute scattering amplitudes for fermions. The only changes come from the fact that the $\hat \psi$ operators anticommute, and from the existence of $\gamma^\mu$ matrices in the propagator. These changes are summarized below and explained in the following paragraphs. Examples are also given in the next section.
+\jtd{Give an example}
+
+\subsection{Spin and Free Fermion Properties}
+Now that we've worked out the fermionic propagator, we can use the same diagram technology as for scalar fields to compute scattering amplitudes for fermions. However, using these amplitudes to predict probabilities for a scattering experiment includes one more step than for scalar theory. A scalar field merely holds one complex number at each location, so a scalar plane wave encodes momentum and no other properties. However, we had to introduce a Dirac spinor field $\hat \psi(x)$ in order to represent fermions, so fermionic plane waves encode both momentum and the value of this spinor, both of which are observed\footnote{We usually refer to the ``spin'' (two component) as what is observed, while here we refer to the ``spinor'' (four component). The difference is subtle and usually not important in this book, but we discuss it in appendix \ref{app:spin-spinors}.}.
+
+To get a scattering amplitude for fermions therefore, we multiply an external fermion leg by the value of the corresponding plane wave's observed spinor. This will always produce a complex number for the scattering amplitude because each fermion propagator has to connect to another fermion at its other end in order to pass on its charge, so that every incoming external fermion leg is connected through a chain of fermion propagators to an outgoing external fermion leg. The value of such a chain is the incoming spinor times gamma matrices from the internal propagators times an outgoing spinor, which is a scalar.
+
+Most of the time, the incoming and outgoing plane waves are unpolarized, meaning that they contain all spins. One could sum the value of the Feynman diagrams for all possible incoming and outgoing spinors, but this is mathematically equivalent to computing the trace of the $\gamma^\mu$ matrices in the internal propagators, as is proved in appendix \ref{app:spin-spinors}. An example of such a trace calculation is given later.
+
+Predictions for the momentum of a fermion are made using the same process as for scalars --- draw a Feynman diagram and evaluate it, according to the rules in the previous rules and the supplementary rules specific to fermions in the section below.
+
+
+\subsection{Fermionic Quirks for Feynman Diagrams}
+Due to the presence of $\gamma^\mu$ matrices in the fermionic propagator and the fact that $\hat \psi$ operators anticommute, a few new rules must be taken into account when computing diagrams with diagrams with fermions. These changes are summarized below and explained in the following paragraphs, and examples are also given in the next section.
 \begin{enumerate}
-  \item The propagators are directed. We should take the non-reversibility of these propagators into account when computing symmetry factors (since fermions are charged)
+  \item Fermionic propagators are directed. We should take the non-reversibility of these propagators into account when computing symmetry factors (since fermions are charged)
   \item The propagators should be multiplied in order when traversing backwards along charge arrows (since $\gamma^\mu$ matrices do not commute)
   \item If two diagrams are equivalent under odd permutations of the external vertices, they contribute opposite signs\footnote{An odd permutation is a permutation which contains an odd number of swaps.} (since fermions anticommute)
   \item To sum over all possible spins, take the trace over products of $\gamma^\mu$ matrices (since the trace is rotation-invariant)

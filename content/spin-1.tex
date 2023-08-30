@@ -82,6 +82,12 @@ though it is sometimes written as
 \end{e}
 where $D_\mu = \del_\mu - i e A_\mu$ is known as the \emph{covariant derivative}.
 
+The same logic also applies to a complex scalar boson, which is why we referred to such particles as charged. There, the Lagrangian is
+\begin{e}
+  \mathcal{L} = -\frac{1}{4}F^{\mu \nu}F_{\mu \nu} + \frac{1}{2}|D_\mu \phi|^2 - m|\phi|^2
+\end{e}
+with the same covariant derivative $D_\mu$ as before. One can verify manually that this Lagrangian is also gauge invariant.
+
 
 \section{Fermions, Gauge Bosons, and Noether's Theorem}
 In this chapter we started with a vector boson and introduced coupling with a fermion in order to make the vector boson observable. But it is also possible to perform the same task backwards: one can start with any fermion, promote any global symmetry to a gauge symmetry, and create a vector boson known as a \emphi{gauge boson}. We'll review that process in this section.
@@ -101,17 +107,40 @@ The tool of gauging a global symmetry is an excellent tool for simplifying the s
 
 This connection between interactions and gauge symmetries was first proposed in 1915, well before the invention of QFT, by Emmy Noether. A mathematician by training and profession, Noether published her incredibly influential Noether's Theorem during a brief six-month break from math, though she was prevented from publishing the result for several years due to institutional sexism against her and her work. The theorem states that any physical theory a gauge symmetry contains a corresponding conserved charge (a charge for which she gives a formula). Our above statement connecting gauge symmetries to vector bosons is same statement in a QFT context, since vector bosons conserve charge.
 
+\section{Feynman Rules and Conserved Quantities}
 
+Before we compute any scattering amplitudes involving vector bosons we need to find the Feynman rules for the new particle. Vector bosons are typically denoted with wavy lines in diagrams, so that the $e\overline \psi\slashed A \psi$ interaction term is depicted as 
+\begin{center}
+  \feynmandiagram [horizontal=a to b, scale=0.8] {
+    a -- [photon, particle=$\mu$] b,
+    f1 [particle] -- [fermion] b -- [fermion] f2 [particle],
+  };$=-ie\gamma^\mu.$
+\end{center}
+When we introduced the fermion, we used the arrows to distinguish between $\psi$ and $\overline \psi$. Now we can also interpret them as arrows pointing in the direction of the flow of charge, and the vector boson interacts with these charge arrows because it carries the charge force. Furthermore, the photons don't have arrows on them but they do have spacetime indices. These indices are contracted with the $\gamma^\mu$ of a vertex when they meet fermions.
 
+To find the propagator of the photon we need to compute the Green's function of the differential operator in the Lagrangian. The kinetic term in the Lagrangian can be written as
+\begin{es}
+  -\frac{1}{4}F^{\mu \nu}F_{\mu \nu}\\
+  -\frac{1}{4}\parens{\del_\mu A_\nu - \del_\nu A_\mu}\parens{\del^\mu A^\nu - \del^\nu A^\mu}\\
+  -\frac{1}{2}\parens{(\del_\mu A_\nu)^2 - \del_\nu A_\mu\del^\mu A^\nu}\\
+  -\frac{1}{2}\parens{\del_\mu A_\nu\del^\mu A^\nu - \del_\nu A_\mu\del^\mu A^\nu}\\
+\end{es}
 
+\jtd{FInish}
 
+Finally, there is the question of how a vector boson plane wave manifests itself in experiment. The value of $A^\mu$ for a plane wave of vector bosons is observable just as the value of a spinor was observable for a plane wave of fermions. For vector bosons, this value $\epsilon^\mu$ is called the polarization. 
 
+However, different $\epsilon^\mu$ vectors might correspond to the same physical system. For example, the vector's normalization is not observable. To remove ambiguity, we therefore normalize polarization according to $\epsilon^\mu \epsilon_\mu = -1$.  Another ambiguity is caused by gauge invariance, which we could choose to remove by picking a gauge. For example, we already discussed that $\del_\mu A^\mu$ is not gauge-invariant, so if we set $\del_\mu A^\mu=0$ we have broken the invariance and picked a gauge known as the Lorentz gauge. If this derivative is computed for a plane wave, it states that $p_\mu \epsilon^\mu = 0$, meaning that polarization is \emphi{transverse}. \jtd{This isn't fully right yet}.
 
+Thus, if a vector photon were traveling along the $z$-axis, the possible polarization vectors are superpositions of $\epsilon^\mu = (0, 1, 0, 0)$ and $\epsilon^\mu = (0, 0, 1, 0)$. To compute a Feynman diagram, the polarizations of the external legs should be multiplied onto the $g_{\mu\nu}$ terms in the internal vector propagators, just as spinors are multiplied onto the Dirac $\gamma^\mu$ matrices of internal legs. If the internal or external plane waves are unpolarized, we can instead multiply the diagram by $-g^{\mu \nu}$ where $\mu$ and $\nu$ are the indices corresponding to those propagators.
 
-\section{The Ward Identity}
 
 \section{Coulomb Potential}
 
+\section{The Ward Identity}
+
 \section{Magnetic Dipole Moment}
+
+\section{Compton Scattering}
 
 \section{Massless Photons are Protected \& Bosonic Spontaneous Symmetry Breaking}
