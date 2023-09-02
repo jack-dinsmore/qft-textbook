@@ -1,8 +1,8 @@
-\documentclass[11pt]{book}
+\documentclass[11pt, a5paper]{memoir}
 
 % I think I need to go back through and better clarify what the difference is between operators in the npcfs and numbers in the path integral. How do anti particles and incoming vs outgoing particles manifest themselves in both?
-
-\usepackage[paperwidth=6in, paperheight=9in, top=0.9in, bottom=1in, left=0.7in, right=0.7in]{geometry}
+% paperwidth=6in, paperheight=9in, 
+\usepackage[top=0.9in, bottom=1in, left=0.8in, right=0.8in]{geometry}
 \usepackage[compat=1.1.0]{tikz-feynman}
 \usepackage{imakeidx} % Index
 \usepackage{amsmath}
@@ -96,6 +96,10 @@
 \fancyfoot[CE,CO]{\thepage}
 \setlength{\headheight}{13.6pt}
 
+\makeatletter
+\DeclareMathSizes{\f@size}{10}{6}{6}
+\makeatother
+
 \tikzfeynmanset{
   momentum/arrow style=gray,
   with arrow/.style = {
@@ -116,13 +120,37 @@
 \begin{document}
 \setcounter{questioncounter}{1}
 
-\maketitle
-\tableofcontents
-\setstretch{1.12}
-
 \frontmatter
+\maketitle
+\clearpage
+
+\linespread{1.12}\selectfont
+\begin{vplace}[0.7]
+  \begin{adjustwidth}{0.5in}{0.5in}
+    \centering
+    \small 
+    I'm a PhD student studying physics at Stanford University. This is my work-in progress quantum field theory textbook, intended for people who are curious about the phenomena, intuition, and mathematical methods behind quantum field theory and particle physics. 
+  
+    \vspace{1cm}
+
+    I am not an expert in quantum field theory. I was only a first year grad student at the time I started this book, and  my field is astrophysics. I'm writing this book as an exercise to help me remember and understand quantum field theory better because I think it's a particularly unique and beautiful branch of physics. I hope this book evokes the same fascination in QFT in others that it did in me, but please remember that it is by no means authoritative.
+    
+    \vspace{1cm}
+  
+    Copyright \copyright Jack Dinsmore 2023
+  \end{adjustwidth}
+\end{vplace}
+\clearpage
+\linespread{1.0}\selectfont
+
+\tableofcontents
+\clearpage
+\linespread{1.12}\selectfont
+
 \input{front/prelude.tex}
+\clearpage
 \input{front/notation.tex}
+\clearpage
 
 \mainmatter
 
@@ -168,11 +196,13 @@ This part is devoted to understanding $n$-point correlation functions, which are
 % \input{content/lagrangian.tex}
 % Stern Gerlach experiment in rel qft?
 
-
+\backmatter
 \appendix
 
 \input{content/appendices}
 
+{
+\small
 \printindex
-
+}
 \end{document}
