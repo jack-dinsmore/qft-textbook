@@ -126,7 +126,7 @@ The final Lagrangian for a massless fermion is thus
 This gives the famous Dirac equation (\ref{eqn:dirac}), when variational calculus is used to compute the corresponding differential equation.
 
 
-\section{Massive Fermions and the $\gamma$ Matrices}
+\section{Massive Fermions and the \texorpdfstring{$\gamma$} Matrices}
 \label{sec:clifford}
 
 The Lagrangian we just derived does not contain a mass term because we had assumed a massless fermion in the above discussion. We could try to add a mass term of the form $\psi^\dagger \psi$ --- inspired by the $\phi^*\phi$ mass term of a scalar field --- but this is incorrect because $\psi^\dagger \psi$ is not CPT invariant as we discussed above.
@@ -180,7 +180,7 @@ The remainder of this book can be understood with just this information, but the
 \end{e}
 so that these generators will include the generators of rotation, which are the Pauli spin matrices. However, the additional generators due to boosts will force us to use the $\gamma^\mu$ matrices instead of the $\sigma^\mu$ matrices. The use of four-component spinors is therefore required for massive fermions.
 
-Along the way, we will discover many useful properties of the $\gamma^\mu$ matrices, find how spinors transform under Lorentz transformations, and show that many forms of the $\gamma^\mu$ matrices exist beyond (\ref{eqn:eqn:weyl-rep}).
+Along the way, we will discover many useful properties of the $\gamma^\mu$ matrices, find how spinors transform under Lorentz transformations, and show that many forms of the $\gamma^\mu$ matrices exist beyond (\ref{eqn:weyl-rep}).
 
 \subsection{Generators of the Lorentz Group}
 
@@ -408,7 +408,7 @@ To leading order in $m_\psi/m_\phi \ll 1$, the cross section is
   M_{\phi\rightarrow \overline \psi \psi}^\mathrm{2D} \approx g + \frac{g^3}{8\pi}\parens{\frac{m_\psi}{m_\phi}}^2\qquad
   M_{\phi\rightarrow \overline \psi \psi}^\mathrm{3D} \approx g + \frac{g^3}{8\pi}\parens{\frac{m_\psi}{m_\phi}}
 \end{e}
-in two and three spacetime dimensions respectively. These answers can be confirmed numerically, or computed analytically using the tools of chapter \ref{chap:qed}. Using the conversion from scattering amplitude to decay rate given in (\ref{eqn:decay-rate}), we can triumphantly write our first lifetime for a particle:
+in two and three spacetime dimensions respectively. These answers can be confirmed numerically, or computed analytically using the tools of chapter \ref{chap:renormalization}. Using the conversion from scattering amplitude to decay rate given in (\ref{eqn:total-decay-rate}), we can triumphantly write our first lifetime for a particle:
 \begin{e}
   \tau_\phi^\mathrm{2D} = \frac{2m_\phi}{g}\parens{1 - \frac{g^2}{8\pi}\frac{m_\psi}{m_\phi}}\qquad
   \tau_\phi^\mathrm{3D} = \frac{2m_\phi}{g}\parens{1 - \frac{g^2}{8\pi}\parens{\frac{m_\psi}{m_\phi}}^2}
@@ -417,7 +417,7 @@ in two and three spacetime dimensions respectively. These answers can be confirm
 \jtd{This has the wrong dimensions}
 Quantum field theory therefore successfully describes particle decay --- the first ever consistent theory of physics to do so.
 
-We have given these answers in unphysically low dimensionality because $M_{\phi \rightarrow \overline \psi \psi}$ diverges as the number of spacetime dimensions approaches four. This divergence also occurred in the case of the scalar particle in chapter \ref{chap:spin-zero}, and in general occurs for a particle which has a dimensionless coupling constant ($\lambda$ for scalar theory; $g$ for Yukawa theory). This was a serious problem historically in developing QFT as mentioned in chapter \ref{chap:intro}, eventually fixed using the techniques we introduce in chapter \ref{chap:qed}. The divergences also have a physical origin which can be understood already as follows:
+We have given these answers in unphysically low dimensionality because $M_{\phi \rightarrow \overline \psi \psi}$ diverges as the number of spacetime dimensions approaches four. This divergence also occurred in the case of the scalar particle in chapter \ref{chap:spin-zero}, and in general occurs for a particle which has a dimensionless coupling constant ($\lambda$ for scalar theory; $g$ for Yukawa theory). This was a serious problem historically in developing QFT as mentioned in chapter \ref{chap:intro}, eventually fixed using the techniques we introduce in chapter \ref{chap:renormalization}. The divergences also have a physical origin which can be understood already as follows:
 
 At the beginning of this section, we justified the Yukawa Lagrangian by stating that any additional interactions are so high in dimension that their cross sections would be proportional to energy (or a positive power of energy). When using two or three spacetime dimensions, even the Yukawa coupling becomes too high in dimensions and we see that $M_{\phi \rightarrow \overline \psi \psi}$ is proportional to $1/m_\phi^{4-d}$, where $d$ is the number of spacetime dimensions. Since $1/m_\phi$ is small, this confirms our intuition that high-dimensionality interactions are irrelevant in this scenario.
 
@@ -461,9 +461,9 @@ The physical consequences of this scattering amplitude are not immediately clear
   M = -2\pi V(\bm p - \bm q)\delta(E_{\bm p} - E_{\bm q})
   \label{eqn:non-relativistic-amplitude-yukawa}
 \end{e}
-where $V$ is the Fourier transform of the potential between the particles. This equation was derived in \ref{sec:scattering}. \jtd{I need to mention that time goes up in diagrams. Derive this equation} Equating this amplitude to the QFT amplitude above \jtd{Why the $i$?} connects the relativistic notion of a three-particle Yukawa interaction to the non-relativistic (and familiar) notion of a potential.
+where $V$ is the Fourier transform of the potential between the particles. This equation was derived in \ref{chap:scattering}. \jtd{ Derive this equation} Equating this amplitude to the QFT amplitude above \jtd{Why the $i$?} connects the relativistic notion of a three-particle Yukawa interaction to the non-relativistic (and familiar) notion of a potential.
 
-Since the particles in our experiment are assumed to be distinguishable, the $t$-channel which mixes particle types should be neglected. Thus, equating (\ref{eqn:relativistic-amplitude-yukawa}) and (\ref{non-relativistic-amplitude-yukawa}) gives
+Since the particles in our experiment are assumed to be distinguishable, the $t$-channel which mixes particle types should be neglected. Thus, equating (\ref{eqn:relativistic-amplitude-yukawa}) and (\ref{eqn:non-relativistic-amplitude-yukawa}) gives
 \begin{e}
   V(\bm k) = -\frac{g^2}{\bm k^2 - m_\phi^2}.
 \end{e}
