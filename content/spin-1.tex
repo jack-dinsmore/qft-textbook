@@ -182,7 +182,7 @@ Another interesting interaction to consider is the scattering of an electron off
 \end{center}
 which contributes the amplitudes
 \begin{e}
-  iM = -ie \epsilon_\mu\overline v\gamma^\mu u
+  iM = -ie \epsilon_\mu \overline v\gamma^\mu u
   \label{eqn:leading-order-mag-mom}
 \end{e}
 where $u$ and $\overline v$ are the spinors of the incoming and outgoing electrons. \jtd{Where's the electric force?} This is reminiscent of the Hamiltonian for spin-magnetic field interaction in non-relativistic quantum mechanics:
@@ -216,8 +216,41 @@ In the next section we'll discuss a somewhat different but equally important his
 
 \section{Compton Scattering}
 
+The phenomenon of photons scattering off atoms has been known long before quantum field theory. A classical model might be to imagine an electromagnetic plane wave incident on a charged particle. The oscillating electric field causes the particle to accelerate, emitting dipole radiation due to Maxwell's equations. From afar, this dipole radiation appears to be scattering of the original plane wave.
+
+This classical explanation of \emphi{Thompson scattering} has two consequences of note. First, the scattered light should have the same frequency as the particle's oscillation and therefore of the incident plane wave. The light loses no energy by scattering. More quantitatively, the total scattering cross section off a particle equal in charge to the electron is
+\begin{e}
+  \sigma_T = \frac{2\alpha}{3m} \approx \SI{6.65e-29}{\meter\squared} \approx \SI{0.66}{\barn}.
+\end{e}
+This cross section is known as the \emphi{Thompson cross section}. Here, $\alpha \approx 1/137$ is the fine structure constant and $m$ is the mass of the charged particle.
+
+However, Arthur Compton discovered in 1923 that both of these consequences are violated. In fact, the higher energy light downshifts in energy after scattering and the cross section decreases from $\sigma_T$. This detection makes perfect sense if you imagine light as a particle; a scattering photon changes momentum and therefore must transfer some of it to the charged particle. Since the charged particle gains kinetic energy due to the additional momentum, the photon must lose energy as well. Furthermore, the energy loss should be more detectible for photons with larger momentum---i.e., higher energy.
+
+\emphi{Compton scattering} as it became known is one of the first definitive proofs that Max Planck was right, and light comes in quanta. But since light is also a relativistic object, a relativistic quantum theory is necessary to understand exactly how Compton scattering arises. In this section, we'll use QFT to derive the cross section of Compton scattering, known as the Klein-Nishina equation.
+
+The first-order Feynman diagram for Compton scattering is very simple:
+\begin{center}
+  \feynmandiagram [horizontal=a to b, scale=0.8] {
+    f1 [particle] -- [fermion,momentum'=$p$] a -- [fermion] b -- [fermion,momentum=$p'$] f2 [particle],
+    f3 [particle=$\nu$] -- [photon,rmomentum=$q'$] a,
+    f4 [particle=$\mu$] -- [photon,momentum=$q$] b,
+  };\qquad $iM=-ie^2\epsilon^\mu u\parens{\gamma_\mu\frac{\slashed p - \slashed q' + m}{(p-q')^2-m^2}\gamma_\nu}\epsilon^\nu \overline v$.
+\end{center}
+But as usual, we can spin-average the cross section. This will eliminate any odd power of $\gamma$, as well as the initial and final polarization and spinor states. Thus, the amplitude simplifies to
+\begin{e}
+  M = -\frac{me^2}{(p-q')^2 - m^2}.
+\end{e}
+Working out the denominator requires the use of momentum conservation and special relativity, which reveals that $(p-q')^2 = m^2\parens{1 - \frac{2\delta}{1+\sin\theta}}$ where $\delta$ is the energy loss of the photon divided by the initial energy (so $\delta < 1$). Thus,
+\begin{e}
+  M = -\frac{e^2}{m}\frac{1 + \sin\theta}{1 + \sin\theta - 2\delta}.
+\end{e}
+\jtd{There's a problem with the sign of $(p-q')^2$ and I think $M$ should decrease with rising $\delta$, not increase.}
+
+
+
+
 \section{The Ward Identity \& Massless Photons are Protected}
 
-\begin{problem}[Repulsion between Electrons]
+\begin{problem}[Repulsion Between Electrons]
   Use the same techniques as section \ref{sec:vector-coulomb} to compute the Coulomb potential between two like-charged particles. Conclude that these particles repel.
 \end{problem}
